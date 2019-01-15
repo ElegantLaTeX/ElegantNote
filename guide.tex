@@ -1,0 +1,201 @@
+\documentclass[cyan]{elegantnote}
+
+\author{ddswhu \& 小L}
+\email{ddswhu@gmail.com}
+\zhtitle{优美的\LaTeX{}模板}
+\entitle{Elegant \LaTeX{}}
+\version{1.00}
+\myquote{Victory won\rq t come to us unless we go to it.}
+\logo{logo.pdf}
+\cover{cover.pdf}
+
+%green color
+   \definecolor{main1}{RGB}{210,168,75}
+   \definecolor{seco1}{RGB}{9,80,3}
+   \definecolor{thid1}{RGB}{0,175,152}
+%cyan color
+   \definecolor{main2}{RGB}{239,126,30}
+   \definecolor{seco2}{RGB}{0,175,152}
+   \definecolor{thid2}{RGB}{236,74,53}
+%cyan color
+   \definecolor{main3}{RGB}{127,191,51}
+   \definecolor{seco3}{RGB}{0,145,215}
+   \definecolor{thid3}{RGB}{180,27,131}
+
+\usepackage{makecell}
+\usepackage{lipsum}
+
+
+
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+\chapter{Elegant Note模板的由来}
+
+只有当自己想去做一件事的时候才能把事情做好！
+
+\section{长长的历史，长长的期待}
+
+写这个模板的初衷是为了简化我在写笔记中的工作，因为我不会写类文件和包文件，所以，最当初是想拜托小L做出一个简洁，清爽的\LaTeX{}模板，最好是类文件，而且因为这样可以简化导言区复杂的内容。后来，和小L一拍即合，遂开始一起做Elegant\LaTeX{}的设计。
+
+在学校的时候，搞定了定理环境样式的代码。因为不想重复 ChinaTeX 那个经典的页眉页脚，我找到了计量书上的一个图案，小L拿 Ti\emph{k}Z 一点一点把那个画出来了，不过我最后还是用的截取的方式得到的图案。然后慢慢地，我们把初步的样子做出来了。
+
+2013年的暑假开始后，我对那个初步的模板做了一点改动，然后用它写了Dynamic Programing 的笔记，并且，在写的过程中，对模板加了封面，也就是模板现在的封面。至此，模板的大致样子终于出来了，不过也在写笔记的过程中知道了某些不足，比如
+\begin{enumerate}
+\item 定理类的环境在我们这个模板中不能浮动，也不能跨页，在我们这个1.00版本中，这个功能仍然没有得到解决。
+\item 某些环境不足，比如例子、假设、性质、结论等环境，在1.00版本中已经增加了这几个环境。
+\item 一些我们不可预知的错误将会不期而遇。
+\item 一些我们目前没有需求，但是可以继续改进的地方，比如表格样式，比如抄录样式等。
+\end{enumerate}
+
+写完那个笔记之后越发让我对Elegant\LaTeX{}模板的制作更有激情，在和小L相互讨论的几天里，我们终于得到了现在这个版本的ElegantNote模板。
+
+
+
+
+\section{一张白纸折腾出一个模板}
+
+我以前从未写过类文件，所以，写这个模板的过程必然是折腾的过程，在写模板的过程中，最主要参考了moderncv.cls文件、武汉大学黄正华老师的论文模板，以及
+各大\LaTeX{}疑问解答网站。
+
+{\color{thid}这章还有这么大空间，忍不住插个图！}
+
+\begin{figure}[!hbtp]
+\includegraphics[width=0.8\textwidth]{happy.jpg}
+\caption{Happiness,We have it!\label{figur:happy}}
+\end{figure}
+
+\chapter{Elegant Note开服说明}
+
+\section{关于字体}
+
+首先呢？基于本模板追求视觉上的美观的角度，强烈建议使用者安装./fonts/文件夹下的字体。出于版权的考虑，务必不能将此模板用于涉及盈利目的的商业行为，否则，后果自负，本模板带的字体仅供学习使用，如果您喜欢某种字体，请自行购买正版。本文主要使用的字体如下
+\begin{itemize}
+\itemsep=3pt
+\parskip=0pt
+\item Adobe Garamond Pro
+\item Minion Pro \& Myriad Pro
+\item 方正字体
+\item 华文中宋
+\end{itemize}
+
+并且，如果系统内安装了Adobe字体，建议大家把模板中的黑体，楷体，宋体等字替换成Adobe字体，这样可以达到最佳效果。
+
+\begin{note}
+需要特别注意的是，如果笔记需要使用到抄录环境的，请重新修改字体，此版本并未为抄录环境设置合适字体，本note环境的字体即为抄录环境使用到的字体。
+\end{note}
+
+\section{文档说明}
+\subsection{编译方式}
+本模板基于book文类，所以book的选项对于本模板也是有效的。但是，只支持 \XeLaTeX{}，编码为 UTF-8，推荐使用 \TeX{}live编译。作者编写环境为Win8(64bit)+\TeX{}live 2013。
+
+本文特殊选项设置共有2类，分为{\color{main}颜色}和{\color{main}数学字体}。
+
+\subsection{选项设置}
+第一类为{\color{main}颜色}主题设置，内置3组颜色主题，分别为green(default)，cyan，blue。默认为green颜色主题。需要改变颜色的话请自行到elegantnote.cls文件内对颜色的RGB值进行修改。
+
+第二类为{\color{main}数学字体}设置，有两个可选项，分别是computer modern 和 mtpro2字体，默认使用cm字体，无需在类文件前加选项，调用mtpro2字体的方法为\verb|\documentclass[mtpro]{elegantnote}|
+
+\begin{table}[htp]
+\centering
+\begin{tabular}{ccccc}
+\toprule	
+	   & green & cyan & blue & 主要使用的环境\\ 
+\midrule
+main & \makecell{{\color{main1}\rule{1cm}{1cm}}}& \makecell{{\color{main2}\rule{1cm}{1cm}}}&\makecell{ {\color{main3}\rule{1cm}{1cm}}}& newdef\\
+
+seco &\makecell{ {\color{seco1}\rule{1cm}{1cm}}}& \makecell{{\color{seco2}\rule{1cm}{1cm}}}&\makecell{ {\color{seco3}\rule{1cm}{1cm}}}&newthem \ newlemma \ newcorol\\
+
+thid &\makecell{ {\color{thid1}\rule{1cm}{1cm}}}& \makecell{{\color{thid2}\rule{1cm}{1cm}}}&\makecell{ {\color{thid3}\rule{1cm}{1cm}}}&newprop\\
+\bottomrule
+\end{tabular}
+\caption{Elegant note 模板中的三套颜色主题\label{tab:color thm}}
+\end{table}
+
+\subsection{数学环境简介}
+在我们这个模板中，定义了三大类环境
+\begin{enumerate}
+\item 定理类环境，包含标题和内容两部分。根据格式的不同分为3种
+\begin{itemize}
+\item {\color{main} newdef} 环境，含有一个可选项，编号以章节为单位；
+\item {\color{main}newthem、newlemma、newcorol} 环境，三者颜色一致，但是定理环境编号以章节为单位，引理和推论为全文编号；
+\item newprop 环境，含有可选项，编号以章节为单位。
+\end{itemize}
+\item 证明类环境，有{\color{main}newproof、note} 环境，特点是，有引导符和引导词，并且证明环境有结束标志。
+\item 示例环境，有{\color{main} example、assumption、conclusion} 环境，三者均以粗体的引导词为开头，字体以灰色，和普通段落格式一致。
+\end{enumerate}
+
+\subsection{可编辑的字段}
+在模板中，可以编辑的字段分别为作者\verb|\author|、\verb|\email|、\verb|\zhtitle|、\verb|\entitle|、\verb|\version|。并且，可以根据自己的喜好把封面水印效果的\verb|cover.pdf|替换掉，以及封面中用到的\verb|logo.pdf|。
+
+\chapter{笔记写作示例}
+
+\section{灵魂不随便出卖，代码也不随便瞎写}
+\lipsum[3]
+考虑如下的随机动态规划问题
+\begin{align*}
+&\max(\min)\quad \mathbb{E}\int_{t_0}^{t_1}f(t,x,u)\,dt\\
+&\quad\mbox{s.t.} \quad dx=g(t,x,u)dt+\sigma(t,x,u)dz\\
+&\quad \hspace{2.em} k(0)=k_0\;\text{given}
+\end{align*}
+
+where $z$ is stochastic process or white noise or wiener process.
+
+\begin{newdef}[Wiener Process]
+If $z$ is wiener process, then for any partition $t_0,t_1,t_2,\ldots$ of time interval, the random variables $z(t_1)-z(t_0),z(t_2)-z(t_1),\ldots$ are independently and normally distributed with zero means and variance $t_1-t_0,t_2-t_1,\ldots$
+\end{newdef}
+
+\lipsum[1-2]
+
+\begin{newthem}[勾股定理]
+勾股定理的数学表达为
+\[a^2+b^2=c^2\]
+其中$a,b$为直角三角形的两条直角边长，$c$为直角三角形斜边长。
+\end{newthem}
+
+\begin{note}
+因为引理，推论的样式和定理的样式一致，仅仅只有计数器的设置不一样，在这里，我们就不写引理和推论的例子了。
+\end{note}
+
+
+\lipsum[4]
+
+\begin{newprop}[最优性原理]
+如果$u^*$在$[s,T]$上为最优解，则$u^*$在$[s,T]$任意子区间都是最优解，假设区间为$[t_0,t_1]$的最优解为$u^*$，则$u(t_0)=u^{*}(t_0)$，即初始条件必须还是在$u^*$上。
+\end{newprop}
+
+\lipsum[5-6]
+\begin{newcorol}
+假设$V(\cdot,\cdot)$为值函数，则跟据最大值原理，有如下推论
+\[
+V(k,z)=\max\Big\{u\big(zf(k)-y\big)+\beta \mathbb{E}V(y,z^\prime)\Big\}
+\]
+\end{newcorol}
+
+\begin{newproof}
+因为 $y^*=\alpha\beta z k^\alpha$，$V(k,z)=\alpha/1-\alpha\beta\ln k_0+1/1-\alpha\beta \ln z_0+\Delta$。
+\begin{align*}
+\text{右边}&=\Big\{u\big(zf(k)-y\big)+\beta \mathbb{E}V(y,z^\prime)\Big\}\\
+&=\ln(zk^\alpha-\alpha\beta zk^\alpha)+\beta\mathbb{E}\Big[\frac{\alpha}{1-\alpha\beta}\ln y+\frac{1}{1-\alpha\beta}\ln z^\prime+\Delta\Big]\\
+&=\ln(1-\alpha\beta)zk^\alpha+\beta\Big\{\mathbb{E}\big[\frac{\alpha}{1-\alpha\beta}\ln \alpha\beta z k^\alpha\big]+\frac{1}{1-\alpha\beta}\mathbb{E}[\ln z^\prime]+\Delta\Big\}
+\end{align*}
+利用$\mathbb{E}[\ln z^\prime]=0$，并将对数展开得
+\begin{align*}
+\text{右边}&=\ln (1-\alpha\beta)+\ln z+\alpha\ln k+\frac{\alpha\beta}{1-\alpha\beta}\big[\ln \alpha\beta+\ln z+\alpha\ln k\big]+\frac{\beta}{1-\alpha\beta}\mu+\beta \Delta\\
+&=\frac{\alpha}{1-\alpha\beta}\ln k+\frac{1}{1-\alpha\beta}\ln z+\Delta
+\end{align*}
+所以$\text{左边}=\text{右边}$，证毕。
+\end{newproof}
+
+
+
+
+\begin{conclusion}
+今天看到一则小幽默，是这样说的：{\color{main} 别人都关心你飞的有多高，只有我关心你的翅膀好不好吃！}说多了都是泪啊！
+\end{conclusion}
+
+最后祝大家\LaTeX{}的学习之路快乐精彩！
+
+\end{document}
