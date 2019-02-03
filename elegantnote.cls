@@ -40,25 +40,41 @@
 \ProcessKeyvalOptions*\relax
 \ProcessOptions*
 
-% 字体设置
+
+
+% fontsetting
 \RequirePackage{ifxetex}
 \ifxetex
-	\RequirePackage{fontspec}
-	\RequirePackage{type1cm}
-	\setmainfont{Times New Roman}
+	\RequirePackage{fontenc}
+	\RequirePackage[no-math]{fontspec}
+	\setmainfont{Times New Roman}[NFSSFamily=ntxtlf]
 	\setsansfont{Arial}
-	\setmonofont{Microsoft YaHei}
+	%\setmonofont[Scale=0.9]{Courier New}
 	\RequirePackage{xeCJK}
-	\RequirePackage{fontspec, xunicode, xltxtra}
-	\setCJKmainfont[BoldFont={黑体},ItalicFont={楷体}]{宋体}
-	\setCJKsansfont[BoldFont={黑体},ItalicFont={楷体}]{楷体}
-	\setCJKmonofont[BoldFont={黑体},ItalicFont={楷体}]{微软雅黑}
+	\RequirePackage{xunicode}
+	\setCJKmainfont[BoldFont={SimHei},ItalicFont={KaiTi}]{SimSun}
+	\setCJKsansfont[BoldFont={SimHei},ItalicFont={KaiTi}]{KaiTi}
+	\setCJKmonofont[BoldFont={SimHei},ItalicFont={KaiTi},Scale=0.9]{Microsoft YaHei}
 	\XeTeXlinebreaklocale "zh"
 	\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+	\RequirePackage{newtxmath}
+	%\DeclareSymbolFont{operators}{OT1}{ntxtlf}{m}{n}
+	%\SetSymbolFont{operators}{bold}{OT1}{ntxtlf}{b}{n}
+	\setCJKfamilyfont{zhsong}{SimSun}
+	\setCJKfamilyfont{zhhei}{SimHei}
+	\setCJKfamilyfont{zhkai}{KaiTi}
+	\setCJKfamilyfont{zhfs}{FangSong}
+	\newcommand*{\songti}{\CJKfamily{zhsong}} 
+	\newcommand*{\heiti}{\CJKfamily{zhhei}}   
+	\newcommand*{\kaishu}{\CJKfamily{zhkai}} 
+	\newcommand*{\fangsong}{\CJKfamily{zhfs}} 
 \else
-	\RequirePackage[UTF8, scheme=plain]{ctex}
+	\RequirePackage{fontenc}
 	\RequirePackage{newtxtext}
+	\RequirePackage{newtxmath}
+	\RequirePackage[UTF8, scheme=plain]{ctex}
 \fi
+\RequirePackage[scale=0.8]{FiraMono}
 
 % 常用宏包
 \RequirePackage{indentfirst}
@@ -66,8 +82,8 @@
 \RequirePackage{amsmath}
 \RequirePackage{graphicx}
 \RequirePackage{booktabs}
+\let\openbox\relax
 \RequirePackage{amsthm}
-\RequirePackage{newtxmath}
 \RequirePackage{xcolor}
 \RequirePackage{hyperref}
 \RequirePackage{xpatch}
@@ -97,47 +113,10 @@
 % graphics path
 \graphicspath{{./figure/}{./figures/}{./image/}{./images/}{./graphics/}{./graphic/}{./pictures/}{./picture/}}
 
-
+\let\openbox\relax
 \newtheoremstyle{plain}{3pt}{3pt}{\itshape}{}{\color{ecolor}\bfseries}{}{0.5em}{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
 \newtheoremstyle{definition}{3pt}{3pt}{\itshape}{}{\color{ecolor}\bfseries}{}{0.5em}{}
 \newtheoremstyle{remark}{3pt}{3pt}{\itshape}{}{\color{ecolor}\bfseries}{}{0.5em}{}
-
-\ifdefstring{\ELEGANT@lang}{cn}{
-  	\theoremstyle{plain}% default
-	\newtheorem{theorem}{定理}[section] %
-	\newtheorem{lemma}[theorem]{引理} %
-	\newtheorem{proposition}[theorem]{性质} %
-	\newtheorem*{corollary}{推论} %
-	\theoremstyle{definition} %
-	\newtheorem{definition}{定义}[section] %
-	\newtheorem{conjecture}{猜想}[section] %
-	\newtheorem{example}{例}[section] %
-	\theoremstyle{remark} %
-	\newtheorem*{remark}{\normalfont\bfseries 评论} %
-	\newtheorem*{note}{\normalfont\bfseries 注} %
-	\newtheorem{case}{\normalfont\bfseries 案例} %
-	\renewcommand*{\proofname}{\normalfont\bfseries\color{ecolor}证明} %
-	\renewcommand\contentsname{\color{ecolor}目录}
-	\renewcommand\refname{\color{ecolor}参考文献} %
-	\renewcommand\figurename{图} %
-	\renewcommand\tablename{表}
-}{\relax}
-\ifdefstring{\ELEGANT@lang}{en}{
-  \theoremstyle{plain}% default
-	\newtheorem{theorem}{Theorem}[section] %
-	\newtheorem{lemma}[theorem]{Lemma} %
-	\newtheorem{proposition}[theorem]{Proposition} %
-	\newtheorem*{corollary}{Corollary} %
-	\theoremstyle{definition} %
-	\newtheorem{definition}{Definition}[section] %
-	\newtheorem{conjecture}{Conjecture}[section] %
-	\newtheorem{example}{Example}[section] %
-	\theoremstyle{remark} %
-	\newtheorem*{remark}{Remark} %
-	\newtheorem*{note}{Note} %
-	\newtheorem{case}{Case} 
-	\renewcommand*{\proofname}{\normalfont\bfseries\color{ecolor}Proof}
-}{\relax}
 
 
 % caption settings 
@@ -187,6 +166,12 @@
   \definecolor{ecolor}{RGB}{0,0,0}%
 }{\relax}
 
+\definecolor{egreen}{RGB}{0,120,2}
+\definecolor{ecyan}{RGB}{0,175,152}
+\definecolor{eblue}{RGB}{20,50,104}
+\definecolor{sakura}{RGB}{255,183,197}
+% \definecolor{black}{RGB}{255,183,197}
+
 %% device settings
 %% default = pad
 \ifdefstring{\ELEGANT@device}{pc}{
@@ -207,6 +192,110 @@
 \allsectionsfont{\color{ecolor}}
 %\sectionfont{\color{ecolor}}
 %\subsectionfont{\color{ecolor}}
+
+\ifdefstring{\ELEGANT@lang}{cn}{
+  \theoremstyle{plain}% default
+	\newtheorem{theorem}{定理}[section] %
+	\newtheorem{lemma}[theorem]{引理} %
+	\newtheorem{proposition}[theorem]{性质} %
+	\newtheorem*{corollary}{推论} %
+	\theoremstyle{definition} %
+	\newtheorem{definition}{定义}[section] %
+	\newtheorem{conjecture}{猜想}[section] %
+	\newtheorem{example}{例}[section] %
+	\theoremstyle{remark} %
+	\newtheorem*{remark}{\normalfont\bfseries 评论} %
+	\newtheorem*{note}{\normalfont\bfseries 注} %
+	\newtheorem{case}{\normalfont\bfseries 案例} %
+	\renewcommand*{\proofname}{\normalfont\bfseries\color{ecolor}证明} %
+	\renewcommand\contentsname{\color{ecolor}目录}
+	\renewcommand\refname{\color{ecolor}参考文献} %
+	\renewcommand\figurename{图} %
+	\renewcommand\tablename{表}
+	\newcommand\versiontext{版本：}%
+	\newcommand\updatetext{更新：}%
+	\setlength{\parindent}{2em}
+  	\newcommand{\keywords}[1]{\vskip2ex\par\noindent\normalfont{\bfseries 关键词: } #1}
+  
+}{\relax}
+\ifdefstring{\ELEGANT@lang}{en}{
+  \theoremstyle{plain}% default
+	\newtheorem{theorem}{Theorem}[section] %
+	\newtheorem{lemma}[theorem]{Lemma} %
+	\newtheorem{proposition}[theorem]{Proposition} %
+	\newtheorem*{corollary}{Corollary} %
+	\theoremstyle{definition} %
+	\newtheorem{definition}{Definition}[section] %
+	\newtheorem{conjecture}{Conjecture}[section] %
+	\newtheorem{example}{Example}[section] %
+	\theoremstyle{remark} %
+	\newtheorem*{remark}{Remark} %
+	\newtheorem*{note}{Note} %
+	\newtheorem{case}{Case} 
+	\renewcommand*{\proofname}{\normalfont\bfseries\color{ecolor}Proof}
+	\newcommand\versiontext{Version: }%
+	\newcommand\updatetext{Update: }%
+}{\relax}
+
+\newtoks\version
+\newtoks\institute
+
+\renewcommand\maketitle{\par
+  \begingroup
+    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
+    \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
+    \long\def\@makefntext##1{\parindent 1em\noindent
+            \hb@xt@1.8em{%
+                \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
+    \if@twocolumn
+      \ifnum \col@number=\@ne
+        \@maketitle
+      \else
+        \twocolumn[\@maketitle]%
+      \fi
+    \else
+      \newpage
+      \global\@topnum\z@   % Prevents figures from going at top of page.
+      \@maketitle
+    \fi
+    \thispagestyle{plain}\@thanks
+  \endgroup
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
+  \global\let\maketitle\relax
+  \global\let\@maketitle\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@date\@empty
+  \global\let\@title\@empty
+  \global\let\title\relax
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+}
+\def\@maketitle{%
+  \newpage
+  \color{ecolor}
+  \null
+  \vskip 2em%
+  \begin{center}%
+  \let \footnote \thanks
+    {\LARGE\bfseries \@title \par}%
+    \vskip 1.5em%
+    {\large
+      \lineskip .5em%
+      \begin{tabular}[t]{c}%
+       \kaishu \@author\\
+        \the\institute
+      \end{tabular}\par}%
+    \vskip 1.5em%
+    {\small\itshape \versiontext \the\version}%
+    \vskip -.5em%
+    {\small\itshape \updatetext \@date}%
+  \end{center}%
+  \par
+  \vskip 1.5em}
+  
 
 \RequirePackage{tikz}
 \usetikzlibrary{shadows}
@@ -230,3 +319,22 @@
   \let\sum\sumop
 \DeclareMathSymbol{\prodop}{\mathop}{cmlargesymbols}{"59}
   \let\prod\prodop
+
+
+\RequirePackage{listings} 
+\definecolor{lightgrey}{rgb}{0.9,0.9,0.9}
+\definecolor{frenchplum}{RGB}{190,20,83}
+\lstset{language=[LaTeX]TeX,
+	texcsstyle=*\bf\color{winered}\ttfamily,
+	basicstyle=\footnotesize\ttfamily,
+	numbers=none,
+	breaklines=true,
+	keywordstyle=\bf\color{winered}\ttfamily,
+	commentstyle=\color{gray},
+	emph={elegantpaper,fontenc,fontspec,xeCJK,FiraMono,xunicode,newtxmath,figure,fig,image,img,table,itemize,enumerate,newtxtext,newtxtt,ctex,microtype,description,times,newtx,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm},
+	emphstyle={\color{frenchplum}},
+	morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords},
+	frame=none,
+	tabsize=2,
+	rulecolor=\color{ecolor},
+}
