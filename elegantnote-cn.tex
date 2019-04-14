@@ -1,16 +1,20 @@
 %!TEX program = xelatex
-\documentclass[geye,green,pad,cn]{elegantnote}
+\documentclass[cn,pad,11pt,geye]{elegantnote}
 
 \title{ElegantNote：一个优美的 \LaTeX{} 笔记模板}
 
 \author{\href{https://ddswhu.me/}{邓东升}}
 \institute{\href{https://elegantlatex.org/}{Elegant\LaTeX{} Program}}
 \version{2.10}
-\date{2019 年 2 月 3 日}
+\date{\today}
+
+
 \begin{document}
 \maketitle
 % logo
 \centerline{\includegraphics[width=0.25\textwidth]{logo.pdf}}
+
+\setlist[itemize]{label=$\circ$}
 
 \section{模板设计}
 此模板设计的初衷是为了记录笔记，在 2013 年开始构想，初版我们设计了非常美观的定理环境，并设计了 3 套不同的颜色主题。但我们发现在实际记笔记的时候，过多的定理区块使得整个文章并不是非常美观，所以我们把 ElegantNote 更新为 ElegantBook 模板，在后面被用户熟知。而 ElegantNote 的设计自此停止。
@@ -30,7 +34,7 @@
 \subsection{护眼模式}
 本模板增加了护眼模式，默认为不开启，开启的方法如下：
 \begin{lstlisting}[frame=none]  
-\documentclass[geye]{elegantnote} % 或者
+\documentclass[geye]{elegantnote} % or
 \documentclass[mode=geye]{elegantnote}
 \end{lstlisting}
 
@@ -60,6 +64,7 @@
 \begin{note}
 如果想要得到普通的 A4 纸张大小的 PDF，需要选择 \lstinline{device=normal}，而不是选择 \lstinline{device=pc}，因为  \lstinline{device=pc} 实际上设置的是电脑双页模式。
 \end{note}
+
 \subsection{颜色主题}
 本模板内置 5 套颜色主题，分别是 \textcolor{egreen}{green}，\textcolor{ecyan}{cyan}， \textcolor{eblue}{blue}， \textcolor{sakura}{sakura}， \textcolor{black}{black}。其中 green 为默认颜色主题，如果用户不需要彩色，可以选择 black 主题。颜色主题的启用方法和之前一样：
 \begin{lstlisting}[frame=none]  
@@ -73,9 +78,9 @@
 \subsection{语言模式}
 本模板内含两套语言环境，改变语言环境会改变图表标题的引导词（图，表），文章结构词（比如目录，参考文献等），以及定理环境中的引导词（比如定理，引理等）。不同语言模式的启用如下：
 \begin{lstlisting}[frame=none]  
-\documentclass[cn]{elegantnote} % 中文模式
+\documentclass[cn]{elegantnote} 
 \documentclass[lang=cn]{elegantnote}
-\documentclass[en]{elegantnote} % 英文模式
+\documentclass[en]{elegantnote} 
 \documentclass[lang=en]{elegantnote}
 \end{lstlisting}
 \begin{note}
@@ -165,7 +170,7 @@ Let $z$ be some element of $xH \cap yH$.  Then $z = xa$ for some $a \in H$, and 
   \label{tab:reg}%
 \end{table}%
 
-\begin{itemize}[noitemsep]
+\begin{itemize}
 	\item Routing and resource discovery;
 	     \begin{itemize} 
       	   	\item Language Models
@@ -176,21 +181,21 @@ Let $z$ be some element of $xH \cap yH$.  Then $z = xa$ for some $a \in H$, and 
 \end{itemize}
 
 \section{示例}
-\begin{lstlisting}[frame=single]  
+\begin{lstlisting}[frame=single]
 \documentclass[geye,green,pad,cn]{elegantnote}
 
-\title{一个笔记示例}
+\title{Note Example}
 \author{ddswhu}
-\institute{Elegant\LaTeX{} 项目组}
+\institute{Elegant\LaTeX{} Program}
 \version{1.00}
-\date{2019 年 2 月 3 日}
+\date{\today}
 
 \begin{document}
 
 \maketitle
 
-\section{介绍}
-介绍部分内容。
+\section{Introduction}
+The content of Introduction.
 
 \end{document}
 \end{lstlisting}
