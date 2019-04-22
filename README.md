@@ -12,7 +12,7 @@
 
 ElegantNote is designed for Notes. Just enjoy it! If you have any questions, suggestions or bug reports, you can create issues, pull requests or email us at elegantlatex2e@gmail.com.
 
-设计 ElegantNote 是为了方便记录笔记和阅读笔记。如果你有其他问题、建议或者报告 bug，可以提交 issues 或者给我们发邮件：elegantlatex2e@gmail.com。
+设计 ElegantNote 是为了方便记录笔记和阅读笔记。如果你有其他问题、建议或者报告 bug，可以提交 issues 或者给我们发邮件：elegantlatex2e@gmail.com。最近我们新建了一个 QQ 用户交流群（Q 群：692108391），欢迎加入。
 
 # License
 
