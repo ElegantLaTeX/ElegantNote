@@ -1,14 +1,17 @@
+% Author: Dongsheng Deng
+% Homepage: https://ddswhu.me/
+% Email: elegantlatex2e@gmail.com
+% Lastest Version: https://github.com/ElegantLaTeX/ElegantNote
+
+% --- Class structure: identification part
+\ProvidesClass{elegantnote}[2018/04/25 ElegantNote v2.20 class]
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantnote}[2018/01/06 ElegantNote v2.00 class]
-\LoadClass{article}
 
 \RequirePackage{kvoptions}
 \RequirePackage{ifthen}
 \RequirePackage{ifxetex}
 \RequirePackage{etoolbox}
 \RequirePackage{calc}
-\AtEndOfClass{\RequirePackage{microtype}}
-
 
 \SetupKeyvalOptions{family=ELEGANT, prefix=ELEGANT@, setkeys=\kvsetkeys}
 \newcommand{\ekv}[1]{\kvsetkeys{ELEGANT}{#1}}
@@ -37,19 +40,21 @@
 \DeclareVoidOption{geye}{\ekv{mode = geye}}
 \DeclareVoidOption{epub}{\ekv{mode = epub}}
 
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
-%\ExecuteOptions{12pt}
+\DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessKeyvalOptions*\relax
-\ProcessOptions*
-
+\LoadClass{article}
 
 \PassOptionsToPackage{no-math}{fontspec}
-\RequirePackage[UTF8, scheme=plain]{ctex}
+\ifdefstring{\ELEGANT@lang}{cn}{
+\RequirePackage[UTF8, scheme=plain,punct=kaiming]{ctex}
+}
+
 \RequirePackage{ifxetex}
 \ifxetex
   \RequirePackage{fontenc}
 \else
   \RequirePackage[T1]{fontenc}
+  \AtEndOfClass{\RequirePackage{microtype}}
 \fi
 
 \RequirePackage{newtxtext}
@@ -147,10 +152,10 @@
   	\definecolor{ecolor}{RGB}{0,120,2}%
 }{\relax}
 \ifdefstring{\ELEGANT@color}{cyan}{
-  \definecolor{ecolor}{RGB}{0,175,152}%
+  \definecolor{ecolor}{RGB}{31,186,190}%
 }{\relax}
 \ifdefstring{\ELEGANT@color}{blue}{
-  \definecolor{ecolor}{RGB}{20,50,104}%
+  \definecolor{ecolor}{RGB}{60,113,183}%
 }{\relax}
 \ifdefstring{\ELEGANT@color}{sakura}{
   \definecolor{ecolor}{RGB}{255,183,197}%
@@ -214,7 +219,6 @@
 	\newcommand\updatetext{更新：}%
 	\setlength{\parindent}{2em}
   	\newcommand{\keywords}[1]{\vskip2ex\par\noindent\normalfont{\bfseries 关键词: } #1}
-  
 }{\relax}
 \ifdefstring{\ELEGANT@lang}{en}{
   \theoremstyle{plain}% default
@@ -230,7 +234,7 @@
 	\newtheorem*{remark}{Remark} %
 	\newtheorem*{note}{Note} %
 	\newtheorem{case}{Case} 
-	\renewcommand*{\proofname}{\normalfont\bfseries\color{ecolor}Proof}
+	\renewcommand*{\proofname}{\normalfont\bfseries\color{ecolor} Proof}
 	\newcommand\versiontext{Version: }%
 	\newcommand\updatetext{Update: }%
 }{\relax}
@@ -297,12 +301,12 @@
 \vskip 1.5em%
 \IfEmpty\version
 \else 
-{\small \normalfont\kaishu \versiontext \itshape\the\version}
+	{\small\normalfont\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu} \versiontext\the\version}
 \fi
 \ifx\@date\empty
 \else
 \vskip 0.1em%
- 	{\small\normalfont\kaishu \updatetext \itshape \@date}%
+ 	{\small\normalfont\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu} \updatetext\@date}%
 \fi
   \end{center}%
   \par
