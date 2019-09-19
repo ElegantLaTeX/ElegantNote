@@ -141,6 +141,9 @@
   \fancyfoot[R]{\footnotesize \textcolor{gray}{\thepage}}%
 }
 
+\RequirePackage[flushmargin]{footmisc}
+\setlength{\footnotesep}{12pt}
+
 % bib-settings
 \RequirePackage{natbib}
 \setlength{\bibsep}{0.0pt}

@@ -8,6 +8,8 @@
 \version{2.20}
 \date{\today}
 
+\usepackage{gbt7714}
+
 
 \begin{document}
 \maketitle
@@ -78,17 +80,17 @@
 本模板内含两套语言环境，改变语言环境会改变图表标题的引导词（图，表），文章结构词（比如目录，参考文献等），以及定理环境中的引导词（比如定理，引理等）。不同语言模式的启用如下：
 \begin{lstlisting}[frame=none]  
 \documentclass[cn]{elegantnote} 
-\documentclass[lang=cn]{elegantnote}
+\documentclass[lang=cn]{elegantnote} 
 \documentclass[en]{elegantnote} 
 \documentclass[lang=en]{elegantnote}
 \end{lstlisting}
 \begin{note}
-不管选用中文环境还是英文环境均可输入中文。另外如果在笔记中使用了抄录环境（\lstinline{lstlisting}），并且其中包括了中文，请务必使用 \lstinline{XeLaTeX} 编译。本说明文档也只能通过 \lstinline{XeLaTeX} 编译。
+只有中文模式才可输入中文，如果需要在英文模式下输入中文，可以自行添加 \lstinline{ctex} 宏包\footnote{需要使用 \lstinline{scheme=plain} 选项才不会把标题改为中文。}或者使用 \lstinline{xeCJK} 宏包设置字体。另外如果在笔记中使用了抄录环境（\lstinline{lstlisting}），并且其中包括了中文，请务必使用 \lstinline{XeLaTeX} 编译。本说明文档也只能通过 \lstinline{XeLaTeX} 编译。
 \end{note}
 
 \subsection{编译方式}
 
-本模板支持两种编译方式，\lstinline{PDFLaTeX} 和 \lstinline{XeLaTeX}，选用 \lstinline{PDFLaTeX} 编译的话，如果用到了中文，则会调用 \lstinline{ctex} 宏包，而如果选用 \lstinline{XeLaTeX} 编译的话，则会调用 \lstinline{xeCJK} 宏包。模板测试环境为 Win10 + \TeX{} Live 2018，设定的字体为 Windows 中的宋体、楷体、黑体、微软雅黑等。如果你的电脑是 Mac/Linux 系统，而且采用 \lstinline{XeLaTeX} 编译的话，请把 \lstinline{elegantnote.cls} 中字体改为自己系统的字体。
+本模板支持两种编译方式，\lstinline{PDFLaTeX} 和 \lstinline{XeLaTeX}。模板测试环境为 Win10 + \TeX{} Live 2019。
 
 \subsection{定理类环境}
 此模板采用了 \lstinline{amsthm} 中的定理样式，使用了 4 类定理样式，所包含的环境分别为
@@ -154,6 +156,8 @@
 \end{equation}
 \end{theorem}
 
+公式~(\ref{eq:461})，公式~\eqref{eq:461}
+
 \begin{proof}
 Let $z$ be some element of $xH \cap yH$.  Then $z = xa$ for some $a \in H$, and $z = yb$ for some $b \in H$. If $h$ is any element of $H$ then $ah \in H$ and $a^{-1}h \in H$, since $H$ is a subgroup of $G$. But $zh = x(ah)$ and $xh = z(a^{-1}h)$ for all $h \in H$. Therefore $zH \subset xH$ and $xH \subset zH$, and thus $xH = zH$.  Similarly $yH = zH$, and thus $xH = yH$, as required.
 \end{proof}
@@ -196,5 +200,9 @@ The content of Introduction.
 
 \end{document}
 \end{lstlisting}
+
+\nocite{*}
+
+\bibliography{wpref}
 
 \end{document}

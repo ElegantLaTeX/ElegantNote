@@ -5,7 +5,8 @@
 \author{\href{https://ddswhu.me/}{Dongsheng Deng}}
 \institute{\href{https://elegantlatex.org/}{Elegant\LaTeX{} Program}}
 \version{2.20}
-\date{April 25, 2019}
+
+\date{\today}
 
 \begin{document}
 \maketitle
@@ -80,12 +81,12 @@ This template contains two sets of language environments, changing the language 
 \documentclass[lang=en]{elegantnote}
 \end{lstlisting}
 \begin{note}
-You can input Chinese Character in either environment.
+You can input Chinese Character in \lstinline{lang=en} mode only.
 \end{note}
 
 \subsection{Compilation Methods}
 
-You can use \lstinline{PDFLaTeX} or \lstinline{XeLaTeX} to process your notes. If you are using \lstinline{PDFLaTeX}, \lstinline{ctex} package is used, and if you are using \lstinline{XeLaTeX}, \lstinline{xeCJK} package is called when processing Chinese characters. 
+You can use \lstinline{PDFLaTeX} or \lstinline{XeLaTeX} to process your notes. If you are using \lstinline{PDFLaTeX}, \lstinline{ctex} package is used, and if you are using \lstinline{XeLaTeX}, \lstinline{ctex} package is called when processing Chinese characters. 
 
 The test environment is Win10 + \TeX{} Live 2018. If you are using a Mac/Linux system and compiled with \lstinline{XeLaTeX},  please change the font in \lstinline{elegantnote.cls} with your system font.
 
