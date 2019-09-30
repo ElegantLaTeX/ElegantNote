@@ -363,7 +363,10 @@
 % \let\pi\relax
 % \DeclareMathSymbol{\pi}{\mathord}{CMletters}{"19}
 
-
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bequ}{\begin{equation*}}
+\newcommand{\eequ}{\end{equation*}}
 
 \lstset{basicstyle=\scriptsize\ttfamily,style=mystyle}
 
