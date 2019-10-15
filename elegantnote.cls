@@ -40,6 +40,11 @@
 \DeclareVoidOption{geye}{\ekv{mode = geye}}
 \DeclareVoidOption{epub}{\ekv{mode = epub}}
 
+\DeclareStringOption[numbers]{cite}
+\DeclareVoidOption{numbers}{\ekv{cite=numbers}}
+\DeclareVoidOption{authoryear}{\ekv{cite=authoryear}}
+\DeclareVoidOption{super}{\ekv{cite=super}}
+
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessKeyvalOptions*\relax
 \LoadClass{article}
@@ -57,8 +62,25 @@
   \AtEndOfClass{\RequirePackage{microtype}}
 \fi
 
+% newtxtext and newtxmath pkg
 \RequirePackage{newtxtext}
 \RequirePackage{newtxmath}
+\RequirePackage{esint}
+
+%%% use yhmath pkg, uncomment following code
+% \let\oldwidering\widering
+% \let\widering\undefined
+% \RequirePackage{yhmath}
+% \let\widering\oldwidering
+
+%%% use esvect pkg, uncomment following code
+% \RequirePackage{esvect}
+
+\DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}
+\let\sumop\relax\let\prodop\relax
+\DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
+\DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"51}
+
 
 \RequirePackage{listings} 
 \renewcommand{\ttdefault}{cmtt}
@@ -90,6 +112,9 @@
     linkcolor=ecolor,
     urlcolor=ecolor
 }
+
+\RequirePackage{hologo}
+
 % 行距设置
 \linespread{1.3}
 \setlength{\parskip}{3mm}
@@ -112,9 +137,9 @@
 \graphicspath{{./figure/}{./figures/}{./image/}{./images/}{./graphics/}{./graphic/}{./pictures/}{./picture/}}
 
 \let\openbox\relax
-\newtheoremstyle{plain}{3pt}{3pt}{\itshape}{}{\color{ecolor}\bfseries}{}{0.5em}{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
-\newtheoremstyle{definition}{3pt}{3pt}{\itshape}{}{\color{ecolor}\bfseries}{}{0.5em}{}
-\newtheoremstyle{remark}{3pt}{3pt}{\itshape}{}{\color{ecolor}\bfseries}{}{0.5em}{}
+\newtheoremstyle{plain}{3pt}{3pt}{\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}}{}{\color{ecolor}\bfseries}{}{0.5em}{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+\newtheoremstyle{definition}{3pt}{3pt}{\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}}{}{\color{ecolor}\bfseries}{}{0.5em}{}
+\newtheoremstyle{remark}{3pt}{3pt}{\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}}{}{\color{ecolor}\bfseries}{}{0.5em}{}
 
 
 % caption settings 
@@ -125,6 +150,11 @@
 % list/itemize/enumerate setting
 \RequirePackage[shortlabels,inline]{enumitem}
 \setlist{nolistsep}
+
+
+\RequirePackage[sort&compress]{natbib}
+\setlength{\bibsep}{0.0pt}
+\def\bibfont{\footnotesize}
 
 
 % headings
@@ -143,11 +173,6 @@
 
 \RequirePackage[flushmargin]{footmisc}
 \setlength{\footnotesep}{12pt}
-
-% bib-settings
-\RequirePackage{natbib}
-\setlength{\bibsep}{0.0pt}
-\def\bibfont{\footnotesize}
 
 \RequirePackage{sectsty}
 
@@ -221,7 +246,8 @@
 	\newcommand\versiontext{版本：}%
 	\newcommand\updatetext{更新：}%
 	\setlength{\parindent}{2em}
-  	\newcommand{\keywords}[1]{\vskip2ex\par\noindent\normalfont{\bfseries 关键词: } #1}
+  \newcommand{\keywords}[1]{\vskip2ex\par\noindent\normalfont{\bfseries 关键词: } #1}
+  \RequirePackage[\ELEGANT@cite]{gbt7714}
 }{\relax}
 \ifdefstring{\ELEGANT@lang}{en}{
   \theoremstyle{plain}% default
@@ -240,6 +266,7 @@
 	\renewcommand*{\proofname}{\normalfont\bfseries\color{ecolor} Proof}
 	\newcommand\versiontext{Version: }%
 	\newcommand\updatetext{Update: }%
+  \bibliographystyle{aer}
 }{\relax}
 
 
@@ -340,32 +367,15 @@
 %source2: https://tex.stackexchange.com/questions/318199/change-color-of-itemize-bullet 
 
 
+\RequirePackage{listings}
+\renewcommand{\ttdefault}{cmtt}
 
-\DeclareSymbolFont{CMletters}     {OML}{cmm} {m}{it}%
-\DeclareSymbolFont{CMsymbols}     {OMS}{cmsy}{m}{n}%
-\DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}%
-
-% \let\sum\relax
-% \DeclareMathSymbol{\sum}{\mathop}{CMlargesymbols}{"50}%
-% \let\int\relax
-% \DeclareMathSymbol{\int}{\mathop}{CMlargesymbols}{"5A}%
-
-\let\intop\relax\let\sumop\relax\let\ointop\relax\let\prodop\relax
-\DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
-\DeclareMathSymbol{\intop}{\mathop}{CMlargesymbols}{"52}
-\DeclareMathSymbol{\ointop}{\mathop}{CMlargesymbols}{"49}
-\DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"59}
-
-% \let\partial\relax
-% \DeclareMathSymbol{\partial}{\mathord}{CMletters}{"40}%
-% \let\in\relax
-%\DeclareMathSymbol{\in}{\mathrel}{CMsymbols}{"32}%
-% \let\pi\relax
-% \DeclareMathSymbol{\pi}{\mathord}{CMletters}{"19}
-
-
-
-\lstset{basicstyle=\scriptsize\ttfamily,style=mystyle}
+\lstdefinestyle{estyle}{
+  basicstyle=%
+    \ttfamily
+    \lst@ifdisplaystyle\footnotesize\fi
+}
+\lstset{basicstyle=\scriptsize\ttfamily,style=estyle}
 
 \definecolor{lightgrey}{rgb}{0.9,0.9,0.9}
 \definecolor{frenchplum}{RGB}{190,20,83}

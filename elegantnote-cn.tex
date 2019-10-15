@@ -1,14 +1,12 @@
 %!TEX program = xelatex
-\documentclass[cn,pad,11pt,green,geye]{elegantnote}
+\documentclass[cn,pad,11pt,epub,epubblue]{elegantnote}
 
 \title{ElegantNote：一个优美的 \LaTeX{} 笔记模板}
 
 \author{\href{https://ddswhu.me/}{邓东升}}
 \institute{\href{https://elegantlatex.org/}{Elegant\LaTeX{} Program}}
 \version{2.20}
-\date{\today}
-
-\usepackage{gbt7714}
+\date{}
 
 
 \begin{document}
@@ -29,7 +27,7 @@
 \item 适配不同设备，包括 Pad（默认），Kindle，PC（双页），通用（A4）；
 \item 5 套颜色主题，分别是：\textcolor{egreen}{green}（默认），\textcolor{ecyan}{cyan}， \textcolor{eblue}{blue}， \textcolor{sakura}{sakura}， \textcolor{black}{black}；
 \item 语言模式支持：中文（默认），英文；
-\item 支持 \lstinline{PDFLaTeX} 和 \lstinline{XeLaTeX} 编译；
+\item 支持 \hologo{pdfLaTeX} 和 \hologo{XeLaTeX} 编译；
 \item 更加美观的图表标题格式，列表环境，数学字体等。
 \end{itemize}
 
@@ -41,7 +39,7 @@
 \end{lstlisting}
 
 \begin{remark}
-此次更新只添加了护眼模式（绿豆沙色背景），如果您有希望增加其他颜色，可以在 \href{https://github.com/ElegantLaTeX/ElegantNote}{Github/ElegantNote} 创建 issues 或者提交 pull request。
+此次更新只添加了护眼模式（绿豆沙色背景），如果您有希望增加其他颜色，可以在 \href{https://github.com/ElegantLaTeX/ElegantNote}{Github::ElegantLaTeX/ElegantNote} 创建 issues 或者发邮件给我们。
 \end{remark}
 
 \subsection{设备选择}
@@ -85,12 +83,12 @@
 \documentclass[lang=en]{elegantnote}
 \end{lstlisting}
 \begin{note}
-只有中文模式才可输入中文，如果需要在英文模式下输入中文，可以自行添加 \lstinline{ctex} 宏包\footnote{需要使用 \lstinline{scheme=plain} 选项才不会把标题改为中文。}或者使用 \lstinline{xeCJK} 宏包设置字体。另外如果在笔记中使用了抄录环境（\lstinline{lstlisting}），并且其中包括了中文，请务必使用 \lstinline{XeLaTeX} 编译。本说明文档也只能通过 \lstinline{XeLaTeX} 编译。
+只有中文模式才可输入中文，如果需要在英文模式下输入中文，可以自行添加 \lstinline{ctex} 宏包\footnote{需要使用 \lstinline{scheme=plain} 选项才不会把标题改为中文。}或者使用 \lstinline{xeCJK} 宏包设置字体。另外如果在笔记中使用了抄录环境（\lstinline{lstlisting}），并且其中包括了中文，请务必使用 \hologo{XeLaTeX} 编译。本说明文档也只能通过 \hologo{XeLaTeX} 编译。
 \end{note}
 
 \subsection{编译方式}
 
-本模板支持两种编译方式，\lstinline{PDFLaTeX} 和 \lstinline{XeLaTeX}。模板测试环境为 Win10 + \TeX{} Live 2019。
+本模板支持两种编译方式，\hologo{pdfLaTeX} 和 \hologo{XeLaTeX}。模板测试环境为 Win10 + \TeX{} Live 2019。
 
 \subsection{定理类环境}
 此模板采用了 \lstinline{amsthm} 中的定理样式，使用了 4 类定理样式，所包含的环境分别为
@@ -201,8 +199,5 @@ The content of Introduction.
 \end{document}
 \end{lstlisting}
 
-\nocite{*}
-
-\bibliography{wpref}
 
 \end{document}
