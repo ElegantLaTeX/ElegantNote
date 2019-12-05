@@ -395,21 +395,20 @@
         \the\institute
       \end{tabular}\par}%
 
-    \IfEmpty\version
-	  \else{
-	    \small\normalfont\ifdefstring{\ELEGANT@lang}{en}{
-	    \itshape}{%
-	    \kaishu}
-	    \versiontext\the\version}
-	  \fi \\
-
+  \IfEmpty\version
+  \else 
+    {\normalfont\ifdefstring{\ELEGANT@lang}{en}{
+    \itshape}{%
+    \kaishu}
+    \versiontext\the\version}
+  \fi \\
 	\ifx\@date\empty
-	  \else{
-	    \small\normalfont\ifdefstring{\ELEGANT@lang}{en}{
-        \itshape}{%
-        \kaishu}
-        \updatetext\@date}%
-      \fi
+	\else 
+    {\normalfont\ifdefstring{\ELEGANT@lang}{en}{
+      \itshape}{%
+      \kaishu}
+      \updatetext\@date}%
+  \fi
   \end{center}%
   \par}
 
