@@ -4,7 +4,7 @@
 % Lastest Version: https://github.com/ElegantLaTeX/ElegantNote
 
 % --- Class structure: identification part
-\ProvidesClass{elegantnote}[2018/04/25 ElegantNote v2.20 class]
+\ProvidesClass{elegantnote}[2018/12/05 ElegantNote v2.40 class]
 \NeedsTeXFormat{LaTeX2e}
 
 \RequirePackage{kvoptions}
@@ -13,7 +13,11 @@
 \RequirePackage{etoolbox}
 \RequirePackage{calc}
 
-\SetupKeyvalOptions{family=ELEGANT, prefix=ELEGANT@, setkeys=\kvsetkeys}
+\SetupKeyvalOptions{
+  family=ELEGANT,
+  prefix=ELEGANT@, 
+  setkeys=\kvsetkeys}
+
 \newcommand{\ekv}[1]{\kvsetkeys{ELEGANT}{#1}}
 
 % ----- Colors -----
@@ -22,44 +26,60 @@
 \DeclareStringOption[cn]{lang}
 \DeclareStringOption{mode}
 % ----- backward compatibility
-\DeclareVoidOption{green}{\ekv{color = green}}
-\DeclareVoidOption{cyan}{\ekv{color = cyan}}
-\DeclareVoidOption{blue}{\ekv{color = blue}}
-\DeclareVoidOption{sakura}{\ekv{color = sakura}}
-\DeclareVoidOption{black}{\ekv{color = black}}
-\DeclareVoidOption{epubblue}{\ekv{color = epubblue}}
+\DeclareVoidOption{green}{\ekv{color=green}}
+\DeclareVoidOption{cyan}{\ekv{color=cyan}}
+\DeclareVoidOption{blue}{\ekv{color=blue}}
+\DeclareVoidOption{sakura}{\ekv{color=sakura}}
+\DeclareVoidOption{black}{\ekv{color=black}}
+\DeclareVoidOption{epubblue}{\ekv{color=epubblue}}
 
-\DeclareVoidOption{pc}{\ekv{device = pc}}
-\DeclareVoidOption{pad}{\ekv{device = pad}}
-\DeclareVoidOption{kindle}{\ekv{device = kindle}}
-\DeclareVoidOption{normal}{\ekv{device = normal}}
+\DeclareVoidOption{pc}{\ekv{device=pc}}
+\DeclareVoidOption{pad}{\ekv{device=pad}}
+\DeclareVoidOption{kindle}{\ekv{device=kindle}}
+\DeclareVoidOption{normal}{\ekv{device=normal}}
+\DeclareVoidOption{screen}{\ekv{device=screen}}
 
-\DeclareVoidOption{cn}{\ekv{lang = cn}}
-\DeclareVoidOption{en}{\ekv{lang = en}}
+\DeclareVoidOption{cn}{\ekv{lang=cn}}
+\DeclareVoidOption{en}{\ekv{lang=en}}
 
-\DeclareVoidOption{geye}{\ekv{mode = geye}}
-\DeclareVoidOption{epub}{\ekv{mode = epub}}
+\DeclareVoidOption{geye}{\ekv{mode=geye}}
+\DeclareVoidOption{epub}{\ekv{mode=epub}}
 
 \DeclareStringOption[numbers]{cite}
 \DeclareVoidOption{numbers}{\ekv{cite=numbers}}
 \DeclareVoidOption{authoryear}{\ekv{cite=authoryear}}
 \DeclareVoidOption{super}{\ekv{cite=super}}
 
-\DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{article}}
+\DeclareStringOption[11pt]{fontsize}
+\DeclareVoidOption{10pt}{\ekv{fontsize=10pt}}
+\DeclareVoidOption{11pt}{\ekv{fontsize=11pt}}
+\DeclareVoidOption{12pt}{\ekv{fontsize=12pt}}
+
+\DeclareDefaultOption{
+  \PassOptionsToClass{\CurrentOption}{article}
+ }
 \ProcessKeyvalOptions*\relax
+
 \LoadClass{article}
 
+
+\RequirePackage{amsmath,amsthm}
 \PassOptionsToPackage{no-math}{fontspec}
-\ifdefstring{\ELEGANT@lang}{cn}{
-\RequirePackage[UTF8, scheme=plain,punct=kaiming]{ctex}
-}
+\ifdefstring{\ELEGANT@lang}{cn}{%
+  \RequirePackage[
+   UTF8,
+   scheme=plain,
+   punct=kaiming]{ctex}
+  }{\relax}
 
 \RequirePackage{ifxetex}
 \ifxetex
   \RequirePackage{fontenc}
 \else
   \RequirePackage[T1]{fontenc}
-  \AtEndOfClass{\RequirePackage{microtype}}
+  \AtEndOfClass{
+   \RequirePackage{microtype}
+  }
 \fi
 
 % newtxtext and newtxmath pkg
@@ -76,41 +96,27 @@
 %%% use esvect pkg, uncomment following code
 % \RequirePackage{esvect}
 
-\DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}
-\let\sumop\relax\let\prodop\relax
-\DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
-\DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"51}
 
-
-\RequirePackage{listings} 
-\renewcommand{\ttdefault}{cmtt}
-\lstdefinestyle{mystyle}{
-  basicstyle=%
-    \ttfamily
-    \lst@ifdisplaystyle\footnotesize\fi
-}
-
-
-% 常用宏包
 \RequirePackage{indentfirst}
 \RequirePackage{anyfontsize}
-\RequirePackage{amsmath}
+
 \RequirePackage{graphicx}
 \RequirePackage{booktabs}
 \let\openbox\relax
-\RequirePackage{amsthm}
+
 \RequirePackage{xcolor}
-\RequirePackage{hyperref}
-\RequirePackage{xpatch}
 \definecolor{winered}{rgb}{0.5,0,0}
 \definecolor{epubblue}{RGB}{1,126,218}
+
+\RequirePackage{hyperref}
+\RequirePackage{xpatch}
 \hypersetup{%
-    pdfborder = {0 0 0},
-    colorlinks,
-    citecolor=ecolor,
-    filecolor=ecolor,
-    linkcolor=ecolor,
-    urlcolor=ecolor
+  pdfborder={0 0 0},
+  colorlinks,
+  citecolor=ecolor,
+  filecolor=ecolor,
+  linkcolor=ecolor,
+  urlcolor=ecolor
 }
 
 \RequirePackage{hologo}
@@ -119,7 +125,7 @@
 \linespread{1.3}
 \setlength{\parskip}{3mm}
 \setlength{\parindent}{2em}
-% 定义护眼模式 geye = true
+% 定义护眼模式 geye=true
 \RequirePackage{xcolor}
 
 % good for eye color 
@@ -134,16 +140,46 @@
 
 
 % graphics path
-\graphicspath{{./figure/}{./figures/}{./image/}{./images/}{./graphics/}{./graphic/}{./pictures/}{./picture/}}
+\graphicspath{
+  {./figure/}
+  {./figures/}
+  {./image/}
+  {./images/}
+  {./graphics/}
+  {./graphic/}
+  {./pictures/}
+  {./picture/}
+}
 
 \let\openbox\relax
-\newtheoremstyle{plain}{3pt}{3pt}{\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}}{}{\color{ecolor}\bfseries}{}{0.5em}{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
-\newtheoremstyle{definition}{3pt}{3pt}{\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}}{}{\color{ecolor}\bfseries}{}{0.5em}{}
-\newtheoremstyle{remark}{3pt}{3pt}{\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}}{}{\color{ecolor}\bfseries}{}{0.5em}{}
+\newtheoremstyle{plain}{3pt}{3pt}{%
+  \ifdefstring{\ELEGANT@lang}{en}{%
+    \itshape}{%
+    \kaishu}}{}{%
+  \color{ecolor}\bfseries}{}{%
+  0.5em}{%
+  \thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
+\newtheoremstyle{definition}{3pt}{3pt}{%
+  \ifdefstring{\ELEGANT@lang}{en}{%
+    \itshape}{%
+    \kaishu}}{}{%
+  \color{ecolor}\bfseries}{}{%
+  0.5em}{}
+
+\newtheoremstyle{remark}{3pt}{3pt}{
+  \ifdefstring{\ELEGANT@lang}{en}{
+    \itshape}{
+    \kaishu}}{}{
+  \color{ecolor}\bfseries}{}{
+  0.5em}{}
 
 
 % caption settings 
-\RequirePackage[font=small,labelfont={bf,color=ecolor}]{caption} 
+\RequirePackage{caption} 
+\captionsetup{
+  font=small,
+  labelfont={bf,color=ecolor}}
 \captionsetup[table]{skip=3pt}
 \captionsetup[figure]{skip=3pt}
 
@@ -168,16 +204,17 @@
 \fancypagestyle{plain}{%
   \renewcommand{\headrulewidth}{0pt}%
   \fancyhf{}%
-  \fancyfoot[R]{\footnotesize \textcolor{gray}{\thepage}}%
-}
+  \fancyfoot[R]{
+    \footnotesize \textcolor{gray}{\thepage}}}
 
-\RequirePackage[flushmargin]{footmisc}
+\RequirePackage[flushmargin,stable]{footmisc}
 \setlength{\footnotesep}{12pt}
 
 \RequirePackage{sectsty}
+\allsectionsfont{\color{ecolor}}
 
 \ifdefstring{\ELEGANT@color}{green}{
-  	\definecolor{ecolor}{RGB}{0,120,2}%
+  \definecolor{ecolor}{RGB}{0,120,2}%
 }{\relax}
 \ifdefstring{\ELEGANT@color}{cyan}{
   \definecolor{ecolor}{RGB}{31,186,190}%
@@ -202,89 +239,118 @@
 % \definecolor{black}{RGB}{255,183,197}
 
 %% device settings
-%% default = pad
+%% default=pad
+
+\RequirePackage{geometry}
+\RequirePackage[\ELEGANT@fontsize]{extsizes}
+
+\ifdefstring{\ELEGANT@device}{pad}{%
+  \geometry{
+    paperwidth=6in,
+    paperheight=8in,
+    includefoot,
+    margin=8mm}}{%
+  \relax}
+
 \ifdefstring{\ELEGANT@device}{pc}{
-	\RequirePackage[margin=8mm, paperwidth=6.2in, paperheight=6in,includefoot]{geometry}
-}{\relax}
-\ifdefstring{\ELEGANT@device}{pad}{
-	\RequirePackage[paperwidth=6in, paperheight=8in,includefoot,margin=8mm]{geometry}
-	%197mm*148mm
-}{\relax}
-\ifdefstring{\ELEGANT@device}{kindle}{
-	\RequirePackage[margin=8mm, paperwidth=3.68in, paperheight=4.92in]{geometry}
-	% 160mm*115mm
-}{\relax}
-\ifdefstring{\ELEGANT@device}{normal}{
-	\RequirePackage[margin=1in, a4paper]{geometry}
-}{\relax}
+  \geometry{%
+    margin=8mm,
+    paperwidth=6.2in,
+    paperheight=6in,
+    includefoot}}{%
+  \relax}
+
+\ifdefstring{\ELEGANT@device}{kindle}{%
+  \geometry{
+    margin=8mm,
+    paperwidth=3.68in, 
+    paperheight=4.92in}}{%
+  \relax}
+
+\ifdefstring{\ELEGANT@device}{normal}{%
+  \geometry{
+    margin=1in,
+    a4paper}}{%
+  \relax}
+
+\ifdefstring{\ELEGANT@device}{screen}{%  
+  \geometry{
+    screen,
+    paperwidth=25.4cm,
+    paperheight=19.05cm,
+    margin=16mm,
+    headheight=2.17cm,
+    footskip=4mm}}{%
+  \relax}
 
 
-
-\allsectionsfont{\color{ecolor}}
-%\sectionfont{\color{ecolor}}
-%\subsectionfont{\color{ecolor}}
-
-\ifdefstring{\ELEGANT@lang}{cn}{
+\ifdefstring{\ELEGANT@lang}{cn}{%
   \theoremstyle{plain}% default
-	\newtheorem{theorem}{定理}[section] %
-	\newtheorem{lemma}[theorem]{引理} %
-	\newtheorem{proposition}[theorem]{性质} %
-	\newtheorem*{corollary}{推论} %
-	\theoremstyle{definition} %
-	\newtheorem{definition}{定义}[section] %
-	\newtheorem{conjecture}{猜想}[section] %
-	\newtheorem{example}{例}[section] %
-	\theoremstyle{remark} %
-	\newtheorem*{remark}{\normalfont\bfseries 评论} %
-	\newtheorem*{note}{\normalfont\bfseries 注} %
-	\newtheorem{case}{\normalfont\bfseries 案例} %
-	\renewcommand*{\proofname}{\normalfont\bfseries\color{ecolor}证明} %
-	\renewcommand\contentsname{\color{ecolor}目录}
-	\renewcommand\refname{\color{ecolor}参考文献} %
-	\renewcommand\figurename{图} %
-	\renewcommand\tablename{表}
-	\newcommand\versiontext{版本：}%
-	\newcommand\updatetext{更新：}%
-	\setlength{\parindent}{2em}
-  \newcommand{\keywords}[1]{\vskip2ex\par\noindent\normalfont{\bfseries 关键词: } #1}
-  \RequirePackage[\ELEGANT@cite]{gbt7714}
-}{\relax}
+  \newtheorem{theorem}{定理}[section] %
+  \newtheorem{lemma}[theorem]{引理} %
+  \newtheorem{proposition}[theorem]{性质} %
+  \newtheorem*{corollary}{推论} %
+  \theoremstyle{definition} %
+  \newtheorem{definition}{定义}[section] %
+  \newtheorem{conjecture}{猜想}[section] %
+  \newtheorem{example}{例}[section] %
+  \theoremstyle{remark} %
+  \newtheorem*{remark}{\normalfont\bfseries 评论} %
+  \newtheorem*{note}{\normalfont\bfseries 注} %
+  \newtheorem{case}{\normalfont\bfseries 案例} %
+  \renewcommand*{\proofname}{\normalfont\bfseries\color{ecolor}证明} %
+  \renewcommand\contentsname{\color{ecolor}目录}
+  \renewcommand\refname{\color{ecolor}参考文献} %
+  \renewcommand\figurename{图} %
+  \renewcommand\tablename{表}
+  \newcommand\versiontext{版本：}%
+  \newcommand\updatetext{更新：}%
+  \setlength{\parindent}{2em}
+  \newcommand{\keywords}[1]{%
+    \vskip2ex\par\noindent\normalfont{\bfseries 关键词: } #1}
+  \RequirePackage[\ELEGANT@cite]{gbt7714}}{%
+  \relax}
+
 \ifdefstring{\ELEGANT@lang}{en}{
   \theoremstyle{plain}% default
-	\newtheorem{theorem}{Theorem}[section] %
-	\newtheorem{lemma}[theorem]{Lemma} %
-	\newtheorem{proposition}[theorem]{Proposition} %
-	\newtheorem*{corollary}{Corollary} %
-	\theoremstyle{definition} %
-	\newtheorem{definition}{Definition}[section] %
-	\newtheorem{conjecture}{Conjecture}[section] %
-	\newtheorem{example}{Example}[section] %
-	\theoremstyle{remark} %
-	\newtheorem*{remark}{Remark} %
-	\newtheorem*{note}{Note} %
-	\newtheorem{case}{Case} 
-	\renewcommand*{\proofname}{\normalfont\bfseries\color{ecolor} Proof}
-	\newcommand\versiontext{Version: }%
-	\newcommand\updatetext{Update: }%
-  \bibliographystyle{aer}
-}{\relax}
-
+  \newtheorem{theorem}{Theorem}[section] %
+  \newtheorem{lemma}[theorem]{Lemma} %
+  \newtheorem{proposition}[theorem]{Proposition} %
+  \newtheorem*{corollary}{Corollary} %
+  \theoremstyle{definition} %
+  \newtheorem{definition}{Definition}[section] %
+  \newtheorem{conjecture}{Conjecture}[section] %
+  \newtheorem{example}{Example}[section] %
+  \theoremstyle{remark} %
+  \newtheorem*{remark}{Remark} %
+  \newtheorem*{note}{Note} %
+  \newtheorem{case}{Case} 
+  \renewcommand*{\proofname}{%
+    \normalfont\bfseries\color{ecolor} Proof}
+  \newcommand\versiontext{Version: }%
+  \newcommand\updatetext{Update: }%
+  \bibliographystyle{aer}}{%
+  \relax}
 
 
 \def\IfEmpty#1{%
   \edef\1{\the#1}
-  \ifx\1\empty
-}
+  \ifx\1\empty}
+
 \newtoks\version
 \newtoks\institute
-\def \ifempty#1{\def\temp{#1} \ifx\temp\empty }
+
+\def \ifempty#1{
+  \def\temp{#1} 
+  \ifx\temp\empty}
+
 \renewcommand\maketitle{\par
   \begingroup
     \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
     \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
     \long\def\@makefntext##1{\parindent 1em\noindent
-            \hb@xt@1.8em{%
-                \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
+         \hb@xt@1.8em{%
+           \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
     \if@twocolumn
       \ifnum \col@number=\@ne
         \@maketitle
@@ -293,7 +359,7 @@
       \fi
     \else
       \newpage
-      \global\@topnum\z@   % Prevents figures from going at top of page.
+      \global\@topnum\z@  % Prevents figures from going at top of page.
       \@maketitle
     \fi
     \thispagestyle{plain}\@thanks
@@ -311,51 +377,52 @@
   \global\let\author\relax
   \global\let\date\relax
   \global\let\and\relax
-  \global\let\ELEGANT@version\relax
-}
+  \global\let\ELEGANT@version\relax}
+
 \def\@maketitle{%
 \thispagestyle{empty}
- \color{ecolor}
+  \color{ecolor}
   \null
   \vskip 2em%
   \begin{center}%
-  \let \footnote \thanks
-    {\LARGE\bfseries \@title \par}%
-    \vskip 1.5em%
-    {\large
+    \let \footnote \thanks{%
+      \LARGE\bfseries \@title \par}%
+    \vskip 1.5em {%
+      \large
       \lineskip .5em%
       \begin{tabular}[t]{c}%
         \@author\\
         \the\institute
       \end{tabular}\par}%
-\vskip 1.5em%
-\IfEmpty\version
-\else 
-	{\small\normalfont\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu} \versiontext\the\version}
-\fi
-\ifx\@date\empty
-\else
-\vskip 0.1em%
- 	{\small\normalfont\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu} \updatetext\@date}%
-\fi
+
+    \IfEmpty\version
+	  \else{
+	    \small\normalfont\ifdefstring{\ELEGANT@lang}{en}{
+	    \itshape}{%
+	    \kaishu}
+	    \versiontext\the\version}
+	  \fi \\
+
+	\ifx\@date\empty
+	  \else{
+	    \small\normalfont\ifdefstring{\ELEGANT@lang}{en}{
+        \itshape}{%
+        \kaishu}
+        \updatetext\@date}%
+      \fi
   \end{center}%
-  \par
-}
+  \par}
 
-% \RequirePackage{fancyhdr}
-
-% \pagestyle{fancy}
-% \fancyhf{}
-% \fancyhead[L]{\@title}
-% \fancyhead[R]{\leftmark}
-% \renewcommand{\headrulewidth}{0pt}
-% \fancyfoot[R]{\thepage}
 
 \RequirePackage{tikz}
 \usetikzlibrary{shadows}
-\newcommand*{\eitemi}{\tikz \draw [baseline, ball color=ecolor, draw=none] circle (2pt);}
-\newcommand*{\eitemii}{\tikz \draw [baseline, fill=ecolor,draw=none,circular drop shadow] circle (2pt);}
-\newcommand*{\eitemiii}{\tikz \draw [baseline, fill=ecolor,draw=none] circle (2pt);}
+\newcommand*{\eitemi}{
+  \tikz\draw[baseline, ball color=ecolor, draw=none] circle (2pt);}
+\newcommand*{\eitemii}{
+  \tikz\draw[baseline, fill=ecolor,draw=none,circular drop shadow] circle (2pt);}
+\newcommand*{\eitemiii}{%
+  \tikz\draw[baseline,fill=ecolor,draw=none] circle (2pt);}
+
 \setlist[enumerate,1]{label=\color{ecolor}\arabic*.}
 \setlist[enumerate,2]{label=\color{ecolor}(\alph*).}
 \setlist[enumerate,3]{label=\color{ecolor}\Roman*.}
@@ -363,8 +430,8 @@
 \setlist[itemize,1]{label={\eitemi}}
 \setlist[itemize,2]{label={\eitemii}}
 \setlist[itemize,3]{label={\eitemiii}}
-%source1: https://tex.stackexchange.com/questions/41408/a-five-level-deep-list
-%source2: https://tex.stackexchange.com/questions/318199/change-color-of-itemize-bullet 
+% source1: https://tex.stackexchange.com/questions/41408/a-five-level-deep-list
+% source2: https://tex.stackexchange.com/questions/318199/change-color-of-itemize-bullet 
 
 
 \RequirePackage{listings}
@@ -373,22 +440,75 @@
 \lstdefinestyle{estyle}{
   basicstyle=%
     \ttfamily
-    \lst@ifdisplaystyle\footnotesize\fi
-}
-\lstset{basicstyle=\scriptsize\ttfamily,style=estyle}
+    \lst@ifdisplaystyle\footnotesize\fi}
+
+% \lstset{
+%   basicstyle=\scriptsize\ttfamily,
+%   style=estyle}
 
 \definecolor{lightgrey}{rgb}{0.9,0.9,0.9}
 \definecolor{frenchplum}{RGB}{190,20,83}
 \lstset{language=[LaTeX]TeX,
-	texcsstyle=*\color{winered},
-	numbers=none,
-	breaklines=true,
-	keywordstyle=\color{winered},
-	commentstyle=\color{gray},
-	emph={elegantpaper,fontenc,fontspec,xeCJK,FiraMono,xunicode,newtxmath,figure,fig,image,img,table,itemize,enumerate,newtxtext,newtxtt,ctex,microtype,description,times,newtx,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm},
-	emphstyle={\color{frenchplum}},
-	morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords},
-	frame=none,
-	tabsize=2,
-	% backgroundcolor=\color{lightgrey}
-}
+  style=estyle,
+  texcsstyle=*\color{winered},
+  numbers=none,
+  breaklines=true,
+  keywordstyle=\color{winered},
+  commentstyle=\color{gray},
+  emph={%
+    elegantpaper,
+    fontenc,
+    fontspec,
+    xeCJK,
+    FiraMono,
+    xunicode,
+    newtxmath,
+    figure,
+    fig,
+    image,
+    img,
+    table,
+    itemize,
+    enumerate,
+    newtxtext,
+    newtxtt,
+    ctex,
+    microtype,
+    description,
+    times,
+    newtx,
+    booktabs,
+    tabular,
+    PDFLaTeX,
+    XeLaTeX,
+    type1cm,
+    BibTeX,
+    device,
+    color,
+    mode,
+    lang,
+    amsthm},
+  emphstyle={\color{frenchplum}},
+  morekeywords={%
+    DeclareSymbolFont,
+    SetSymbolFont,
+    toprule,
+    midrule,
+    bottomrule,
+    institute,
+    version,
+    includegraphics,
+    setmainfont,
+    setsansfont,
+    setmonofont ,
+    setCJKmainfont,
+    setCJKsansfont,
+    setCJKmonofont,
+    RequirePackage,
+    figref,
+    tabref,
+    email,
+    maketitle,
+    keywords},
+  frame=none,
+  tabsize=2}
