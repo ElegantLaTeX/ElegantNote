@@ -1,4 +1,4 @@
-\documentclass[en,epubblue,blue,screen,14pt]{elegantnote}
+\documentclass[en,hazy,screen,blue,14pt]{elegantnote}
 
 \title{ElegantNote: An Elegant \LaTeX{} Template for Notes}
 
@@ -11,61 +11,77 @@
 \begin{document}
 \maketitle
 % logo
-\centerline{\includegraphics[width=0.2\textwidth]{logo-blue.pdf}}
+\centerline{\includegraphics[width=0.2\textwidth]{logo-blue}}
 
-\section{Features Overview}
+\section{ElegantNote Instructions}
+\thispagestyle{empty}
+The brand new ElegantNote is redesigned on the basis of \LaTeX{} article, a more elegant note template! You can use either \hologo{pdfLaTeX} or \hologo{XeLaTeX} to compile\footnote{The test environment is Win10 + \TeX{} Live 2019.}. It is recommended that \hologo{pdfLaTeX} be used for notes in English while \hologo{XeLaTeX} be used for notes in Chinese.
 
-This template was originally designed to take notes and was conceived in 2013. In the first version, we designed a  series of beautiful theorem environments and introduced 3 different color themes. But when taking notes using this template, we found there were so many theorem blocks which makes the notes not pretty. So we decided to update the ElegantNote to the ElegantBook template. The design of ElegantNote stopped there.
-
-In 2018, after being "urged" by some users, ElegantBook received a major update, the original floating theorem environments are rewritten with tcolorbox package. After that, we want to completely redesign the ElegantNote template. We are in favor of more compact, simpler theorem environments, and aim to design an Elegant \LaTeX{} template which is more suitable for note taking and note reading.
-
-With the advice and inspiration of some friends, we redesigned the new ElegantNote template based on the Standard \LaTeX{} article class! The new template has the following features:
+The new template has the following features:
 \begin{itemize}
-  \item good for eye mode: with green page color;
-  \item different devices: Pad (default), Kindle, PC (double-page) and normal (A4);
-  \item 5 color themes: \textcolor{egreen}{green} (default), \textcolor{ecyan}{cyan}, \textcolor{eblue}{blue}, \textcolor{sakura}{sakura}, \textcolor{black}{black};
+  \item two modes: good for eye mode (geye) and hazy mode;
+  \item different devices: Pad (default), Screen(beamer size), Kindle, PC (double-page) and normal (A4);
+  \item 5 color themes: \textcolor{eblue}{blue} (default),  \textcolor{egreen}{green}, \textcolor{ecyan}{cyan}, \textcolor{sakura}{sakura} and \textcolor{black}{black};
   \item languages support: Chinese (default), English;
   \item support \hologo{pdfLaTeX} and \hologo{XeLaTeX};
-  \item prettier captions, list environments, and unified fonts.
+  \item prettier captions, list environments, and unified fonts;
+  \item custmized global font size: 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt and 20pt.
 \end{itemize}
 
-\subsection{Good for Eye Mode}
 
-This template added good for eye mode (geye), the default is none, you can switch to good eye mode using:
+\subsection{Optional Modes}
+
+This template provides optional modes: good for eye mode (geye) and hazy mode, while the paper color is green for the former and light blue for the latter. you can use the following code to activate the desired mode:
 \begin{lstlisting}[frame=none]  
-  \documentclass[geye]{elegantnote}  % or
+  \documentclass[geye]{elegantnote} % or
   \documentclass[mode=geye]{elegantnote}
+  \documentclass[hazy]{elegantnote} % or
+  \documentclass[mode=hazy]{elegantnote}
 \end{lstlisting}
 
 \begin{remark}
-In this version, only one background color is added. If you are expected to add other colors, you can create issues or pull requests at \href{https://github.com/ElegantLaTeX/ElegantNote}{Github/ElegantNote}.
+  If you are expected to customize background, use:
+  \begin{lstlisting}
+    \definecolor{geyecolor}{RGB}{199,237,204}
+    \pagecolor{geyecolor}
+  \end{lstlisting}
 \end{remark}
+
 
 \subsection{Device Options}
 
-To make the notes more comfortable to read, we designed four output options (of different sizes) that correspond to different reading devices: Pad, Kindle, PC and A4paper. The options of output for different devices are
+To make the notes more comfortable to read, we designed four output options (of different sizes) that correspond to different reading devices: Pad (default), Kindle, PC and A4paper. 
+
+\textcolor{red}{New}: For the convenience of notes presentation, version 2.40 offers a new option for device, i.e. \lstinline{device=screen}, which is similar to the size of MS Powerpoint with ratio aspect of 4:3 (2019/12/06).
+
+The options of output for different devices are
 \begin{lstlisting}[frame=none]  
-  \documentclass[device=pad]{elegantnote}
-  \documentclass[device=kindle]{elegantnote}
-  \documentclass[device=pc]{elegantnote}
-  \documentclass[device=normal]{elegantnote}
+  \documentclass[device=pad]{elegantnote}    % ipad screen size
+  \documentclass[device=kindle]{elegantnote} % kindle screen size
+  \documentclass[device=pc]{elegantnote}     % double pages for pc 
+  \documentclass[device=normal]{elegantnote} % a4 normal page
+  \documentclass[device=screen]{elegantnote} % 4:3 PPT size
 \end{lstlisting}
 
+\begin{note}
 You can also select the device by using a direct assignment method, such as:
+\end{note}
+
 \begin{lstlisting}[frame=none]  
   \documentclass[pad]{elegantnote}
   \documentclass[kindle]{elegantnote}
   \documentclass[pc]{elegantnote}
   \documentclass[normal]{elegantnote}
+  \documentclass[screen]{elegantnote}
 \end{lstlisting}
 
 \begin{note}
-Note that if you want a normal A4paper size PDF, you need to select \lstinline{device=normal} instead of \lstinline{device=pc} , because \lstinline{device=pc} is actually set to double page mode on your computer.
+To get a normal A4paper size PDF, please select \lstinline{device=normal}.
 \end{note}
 
-\subsection{Color Themes}
+\subsection[Color Themes]{Color Themes\footnote{Test for chapter footnote.}}
 
-This template contains 5 color themes, \textcolor{egreen}{green}, \textcolor{ecyan}{cyan}, \textcolor{eblue}{blue}, \textcolor{sakura}{sakura}, \textcolor{black}{black}. Where green is the default color theme, if you don't need color, you can choose black theme. The color theme is enabled in the same way as before:
+This template contains 5 color themes, \textcolor{egreen}{green}, \textcolor{ecyan}{cyan}, \textcolor{eblue}{blue}(default), \textcolor{sakura}{sakura} and \textcolor{black}{black}. If you don't need color, you can choose black theme. The color theme is enabled in the same way as before:
 \begin{lstlisting}[frame=none]  
   \documentclass[green]{elegantnote}
   \documentclass[color=green]{elegantnote}
@@ -73,6 +89,7 @@ This template contains 5 color themes, \textcolor{egreen}{green}, \textcolor{ecy
   \documentclass[black]{elegantnote}
   \documentclass[color=black]{elegantnote}
 \end{lstlisting}
+
 
 \subsection{Languages}
 
@@ -85,8 +102,9 @@ This template contains two sets of language environments, changing the language 
 \end{lstlisting}
 
 \begin{note}
-You can use \hologo{pdfLaTeX} or \hologo{XeLaTeX} to process your notes. You can input Chinese Characters in \lstinline{lang=cn}\footnote{\lstinline{ctex} package is called.} mode only. 
+Chinese characters are allowed in Chinese mode only. To type in Chinese characters in English mode, please include \lstinline{ctex}\footnote{Please use \lstinline{scheme=plain} to retain headlines in English.} or \lstinline{xeCJK} package.
 \end{note}
+
 
 \subsection{Theorem Class Environments}
 
@@ -101,6 +119,7 @@ This template used the \lstinline{amsthm} to create theorems, there are 4 types 
 \begin{remark}
 With the option \lstinline{lang=cn} , the introductory words of the theorem class environments will be changed to Chinese.
 \end{remark}
+
 
 \section{Writing Sample}
 
@@ -171,16 +190,89 @@ Let's continue using our application training example. In this case, we'd want t
   \item Distributed storage and search.
 \end{itemize}
 
+
+\section{Recruit Support Members}
+
+Recruit support members for Elegant\LaTeX{} to translate template official guide, maintain wiki entries, update Wechat articles. No deadline for this recruitment.
+
+So far, Elegant\LaTeX{} has four support members:
+\begin{itemize}
+	\item OG Translator: \href{https://github.com/peggy2006xzyz}{YPY};
+	\item Wiki Maintainer: \href{https://github.com/izinngo}{Ingo Zinngo}, \href{https://github.com/xiaohao890809}{Xiaohao890809};
+	\item QQ Group Manager: \href{https://github.com/sikouhjw}{Sikouhjw}.
+\end{itemize}
+
+Thank them all!!!
+
+\section{Acknowledgement}
+The number of stars on Github for ElegantPaper reached 176 on Dec. 8, 2019 at the release of ElegantNote v2.40.
+Thank China\TeX{} and \href{http://www.latexstudio.net/}{\LaTeX{} studio} for their promotion. 
+
+If you like our templates, star on Github.
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\textwidth]{star.png}
+	\caption{Twinkle, Twinkle, Little Star}
+\end{figure}
+
+\section{Donation}
+To express your love for our templates and/or our developers, please do not hesitate to tip us.
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.4\textwidth]{donate.jpg}
+\end{figure}
+
+\textbf{The explanation right of the tip usage belongs to Elegant\LaTeX{} with no supervision. Feel free to tip us.} Those who donate more than 10 RMB will be recorded in the donation list and will receive a donation certificate. Thank all the tippers!
+
+\begin{table}[htbp]
+  \centering
+  \caption{Donation List}
+    \begin{tabular}{cccccccc}
+    \toprule
+    \textbf{Tipper} & \textbf{Amount} & \textbf{Date} & \textbf{Channel} & \textbf{Tipper} & \textbf{Amount} & \textbf{Date} & \textbf{Channel} \\
+    \midrule
+    Lerh  & 10 RMB & 2019/5/15 & Wechat & LIU ZhiKuo & 100 RMB & 2019/10/15 & Alipay \\
+    DiPingXian & 10 RMB & 2019/5/15 & Wechat & * Tao & 16 RMB & 2019/10/17 & Wechat \\
+    YinSang & 20 RMB & 2019/5/27 & Wechat & ChiHong & 12 RMB & 2019/10/17 & Alipay \\
+    * Kong & 10 RMB & 2019/5/30 & Wechat & YuanFengJing & 10 RMB & 2019/10/28 & Wechat \\
+    latexstudio.net & 666 RMB & 2019/6/05 & Alipay & GUO DeLiang & 88 RMB & 2019/11/03 & Wechat \\
+    Cassis & 11 RMB & 2019/6/30 & Wechat & ZiQiangBuXi & 20 RMB & 2019/11/03 & Alipay \\
+    * Jun & 10 RMB & 2019/7/23 & Wechat & DuShuZhiChong & 20 RMB & 2019/11/18 & Wechat \\
+    P*u   & 50 RMB & 2019/7/30 & Wechat & * Deng & 10 RMB & 2019/11/18 & Wechat \\
+    * Meng & 19 RMB & 2019/8/28 & Wechat & * Zhe & 20 RMB & 2019/11/18 & Wechat \\
+    QuDouDou & 10 RMB & 2019/8/28 & Wechat & anonymous & 10 RMB & 2019/11/24 & Wechat \\
+    LI Bo & 100 RMB & 2019/10/06 & Wechat & Jiye Qian & 66 RMB & 2019/12/04 & Wechat \\
+    Njustsll & 10 RMB & 2019/10/11 & Wechat & Boy Yang & 20 RMB & 2019/12/05 & Wechat \\
+\bottomrule
+\end{tabular}%
+  \label{tab:donation}%
+\end{table}%
+
+
+\section{FAQ}
+
+\begin{enumerate}[label=\arabic*).]
+	\item \textit{How to remove the information of version?}\\
+    Please comment \lstinline|\version{x.xx}|.
+	\item \textit{How to remove the information of date?}\\
+	  Please type in \lstinline|\date{}|.
+	\item \textit{How to add several authors?}\\
+	  Use \lstinline{\and} in \lstinline{\author} and use \lstinline{\\} to start a new line.
+    \begin{lstlisting}
+      \author{author 1\\ org. 1 \and author 2 \\ org. 2 }
+    \end{lstlisting}
+\end{enumerate}
+
 \section{A Minimal Example}
 
-\begin{lstlisting}[frame=single]  
-\documentclass[geye,green,pad,en]{elegantnote}
+\begin{lstlisting}
+\documentclass[en,hazy,blue,screen,14pt]{elegantnote}
 
-\title{A Note Example}
+\title{ElegantNote Example}
 \author{ddswhu}
 \institute{Elegant\LaTeX{} Program}
-\version{1.00}
-\date{\today}
+% \version{1.00}
+\date{}
 
 \begin{document}
 
@@ -188,7 +280,7 @@ Let's continue using our application training example. In this case, we'd want t
 
 \section{Introduction}
 
-Example Text.
+The content of Introduction.
 
 \end{document}
 \end{lstlisting}

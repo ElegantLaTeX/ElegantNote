@@ -4,7 +4,7 @@
 % Lastest Version: https://github.com/ElegantLaTeX/ElegantNote
 
 % --- Class structure: identification part
-\ProvidesClass{elegantnote}[2018/12/05 ElegantNote v2.40 class]
+\ProvidesClass{elegantnote}[2018/12/08 ElegantNote v2.40 class]
 \NeedsTeXFormat{LaTeX2e}
 
 \RequirePackage{kvoptions}
@@ -21,7 +21,7 @@
 \newcommand{\ekv}[1]{\kvsetkeys{ELEGANT}{#1}}
 
 % ----- Colors -----
-\DeclareStringOption[green]{color}
+\DeclareStringOption[blue]{color}
 \DeclareStringOption[pad]{device}
 \DeclareStringOption[cn]{lang}
 \DeclareStringOption{mode}
@@ -31,7 +31,7 @@
 \DeclareVoidOption{blue}{\ekv{color=blue}}
 \DeclareVoidOption{sakura}{\ekv{color=sakura}}
 \DeclareVoidOption{black}{\ekv{color=black}}
-\DeclareVoidOption{epubblue}{\ekv{color=epubblue}}
+
 
 \DeclareVoidOption{pc}{\ekv{device=pc}}
 \DeclareVoidOption{pad}{\ekv{device=pad}}
@@ -43,7 +43,7 @@
 \DeclareVoidOption{en}{\ekv{lang=en}}
 
 \DeclareVoidOption{geye}{\ekv{mode=geye}}
-\DeclareVoidOption{epub}{\ekv{mode=epub}}
+\DeclareVoidOption{hazy}{\ekv{mode=hazy}}
 
 \DeclareStringOption[numbers]{cite}
 \DeclareVoidOption{numbers}{\ekv{cite=numbers}}
@@ -72,15 +72,6 @@
    punct=kaiming]{ctex}
   }{\relax}
 
-\RequirePackage{ifxetex}
-\ifxetex
-  \RequirePackage{fontenc}
-\else
-  \RequirePackage[T1]{fontenc}
-  \AtEndOfClass{
-   \RequirePackage{microtype}
-  }
-\fi
 
 % newtxtext and newtxmath pkg
 \RequirePackage{newtxtext}
@@ -96,6 +87,10 @@
 %%% use esvect pkg, uncomment following code
 % \RequirePackage{esvect}
 
+\DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}
+\let\sumop\relax\let\prodop\relax
+\DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
+\DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"51}
 
 \RequirePackage{indentfirst}
 \RequirePackage{anyfontsize}
@@ -127,13 +122,14 @@
 \setlength{\parindent}{2em}
 % 定义护眼模式 geye=true
 \RequirePackage{xcolor}
+\RequirePackage{silence}
 
 % good for eye color 
 \ifdefstring{\ELEGANT@mode}{geye}{
   \definecolor{geyecolor}{RGB}{199,237,204}%
   \pagecolor{geyecolor}
 }{\relax}
-\ifdefstring{\ELEGANT@mode}{epub}{
+\ifdefstring{\ELEGANT@mode}{hazy}{
   \definecolor{geyecolor}{RGB}{251,250,248}%
   \pagecolor{geyecolor}
 }{\relax}
@@ -178,7 +174,6 @@
 % caption settings 
 \RequirePackage{caption} 
 \captionsetup{
-  font=small,
   labelfont={bf,color=ecolor}}
 \captionsetup[table]{skip=3pt}
 \captionsetup[figure]{skip=3pt}
@@ -210,8 +205,10 @@
 \RequirePackage[flushmargin,stable]{footmisc}
 \setlength{\footnotesep}{12pt}
 
-\RequirePackage{sectsty}
-\allsectionsfont{\color{ecolor}}
+\RequirePackage{titlesec}
+\titleformat*{\section}{\normalfont\Large\bfseries\color{ecolor}}
+\titleformat*{\subsection}{\normalfont\large\bfseries\color{ecolor}}
+\titleformat*{\subsubsection}{\normalfont\normalsize\bfseries\color{ecolor}}
 
 \ifdefstring{\ELEGANT@color}{green}{
   \definecolor{ecolor}{RGB}{0,120,2}%
@@ -220,16 +217,13 @@
   \definecolor{ecolor}{RGB}{31,186,190}%
 }{\relax}
 \ifdefstring{\ELEGANT@color}{blue}{
-  \definecolor{ecolor}{RGB}{60,113,183}%
+  \definecolor{ecolor}{RGB}{1,126,218}%
 }{\relax}
 \ifdefstring{\ELEGANT@color}{sakura}{
   \definecolor{ecolor}{RGB}{255,183,197}%
 }{\relax}
 \ifdefstring{\ELEGANT@color}{black}{
   \definecolor{ecolor}{RGB}{0,0,0}%
-}{\relax}
-\ifdefstring{\ELEGANT@color}{epubblue}{
-  \definecolor{ecolor}{RGB}{1,126,218}%
 }{\relax}
 
 \definecolor{egreen}{RGB}{0,120,2}
@@ -242,7 +236,9 @@
 %% default=pad
 
 \RequirePackage{geometry}
+\WarningsOff
 \RequirePackage[\ELEGANT@fontsize]{extsizes}
+\WarningsOn
 
 \ifdefstring{\ELEGANT@device}{pad}{%
   \geometry{
@@ -278,9 +274,9 @@
     screen,
     paperwidth=25.4cm,
     paperheight=19.05cm,
-    margin=16mm,
+    margin=1.6cm,
     headheight=2.17cm,
-    footskip=4mm}}{%
+    footskip=0.6cm}}{%
   \relax}
 
 
@@ -362,7 +358,7 @@
       \global\@topnum\z@  % Prevents figures from going at top of page.
       \@maketitle
     \fi
-    \thispagestyle{plain}\@thanks
+    \thispagestyle{empty}\@thanks
   \endgroup
   \setcounter{footnote}{0}%
   \global\let\thanks\relax
@@ -380,7 +376,6 @@
   \global\let\ELEGANT@version\relax}
 
 \def\@maketitle{%
-\thispagestyle{empty}
   \color{ecolor}
   \null
   \vskip 2em%
@@ -400,8 +395,8 @@
     {\normalfont\ifdefstring{\ELEGANT@lang}{en}{
     \itshape}{%
     \kaishu}
-    \versiontext\the\version}
-  \fi \\
+    \versiontext\the\version \\}
+  \fi
 	\ifx\@date\empty
 	\else 
     {\normalfont\ifdefstring{\ELEGANT@lang}{en}{
@@ -433,7 +428,7 @@
 % source2: https://tex.stackexchange.com/questions/318199/change-color-of-itemize-bullet 
 
 
-\RequirePackage{listings}
+\RequirePackage{listings,lstautogobble}
 \renewcommand{\ttdefault}{cmtt}
 
 \lstdefinestyle{estyle}{
@@ -449,6 +444,7 @@
 \definecolor{frenchplum}{RGB}{190,20,83}
 \lstset{language=[LaTeX]TeX,
   style=estyle,
+  autogobble=true,
   texcsstyle=*\color{winered},
   numbers=none,
   breaklines=true,
@@ -505,6 +501,8 @@
     setCJKmonofont,
     RequirePackage,
     figref,
+    pagecolor,
+    definecolor,
     tabref,
     email,
     maketitle,
