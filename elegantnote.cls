@@ -4,7 +4,7 @@
 % Lastest Version: https://github.com/ElegantLaTeX/ElegantNote
 
 % --- Class structure: identification part
-\ProvidesClass{elegantnote}[2018/12/08 ElegantNote v2.40 class]
+\ProvidesClass{elegantnote}[2018/12/08 ElegantNote v2.20 class]
 \NeedsTeXFormat{LaTeX2e}
 
 \RequirePackage{kvoptions}
