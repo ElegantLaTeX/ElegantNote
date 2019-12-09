@@ -24,7 +24,7 @@
 
 新模板有下面几个特性：
 \begin{itemize}
-  \item 纸张模式：朦胧模式（hazy）和护眼模式（geye）；
+  \item 纸张模式：护眼模式（geye）和朦胧模式（hazy）；
   \item 适配不同设备，包括 Pad（默认），Screen\footnote{\textcolor{red}{本次更新新增内容。}}（幻灯片），Kindle，PC（双页），通用（A4 纸张）；
   \item 5 套颜色主题，分别是：\textcolor{eblue}{blue}（默认）、\textcolor{egreen}{green}、\textcolor{ecyan}{cyan}、 \textcolor{sakura}{sakura} 和 \textcolor{black}{black}；
   \item 语言支持：中文（默认），英文；
@@ -57,7 +57,7 @@
 
 为了让笔记方便在不同设备上阅读，免去切边，缩放等操作，本模板适配不同的设备，分别为 Pad（默认），Kindle，PC，A4。
 
-\textcolor{red}{\kaishu 新增}：为了方便展示笔记，2.40 版本新增了 \lstinline{device=screen} 设备选项，大小为 MS Powerpoint 的纸张大小，比例为 4:3（2019/12/06）。
+\textcolor{red}{\kaishu 新增}：为了方便展示笔记，2.20 版本新增了 \lstinline{device=screen} 设备选项，大小为 MS Powerpoint 的纸张大小，比例为 4:3（2019/12/06）。
 
 不同屏幕的选择为
 \begin{lstlisting}[frame=none]  
@@ -85,7 +85,7 @@
 
 \subsection[颜色主题]{颜色主题\footnote{测试章节脚注。}}
 
-本模板内置 5 套颜色主题，分别是 \textcolor{eblue}{blue}（默认），\textcolor{egreen}{green}， \textcolor{ecyan}{cyan}， \textcolor{sakura}{sakura}， \textcolor{black}{black}。如果不需要颜色，可以选择黑色（black）主题。颜色主题的设置方法：
+本模板内置 5 套颜色主题，分别是 \textcolor{eblue}{blue}（默认），\textcolor{egreen}{green}， \textcolor{ecyan}{cyan}， \textcolor{sakura}{sakura} 和 \textcolor{black}{black}。如果不需要颜色，可以选择黑色（black）主题。颜色主题的设置方法：
 \begin{lstlisting}[frame=none]  
   \documentclass[green]{elegantnote}
   \documentclass[color=green]{elegantnote}
@@ -218,6 +218,7 @@ Let $z$ be some element of $xH \cap yH$.  Then $z = xa$ for some $a \in H$, and 
 \textbf{赞赏费用的使用解释权归 Elegant\LaTeX{} 所有，并且不接受监督，请自愿理性打赏}。10 元以上的赞赏，我们将列入捐赠榜，并且发放捐赠纪念证（全部），谢谢各位金主！
 
 \begin{table}[htbp]
+  \small
   \centering
   \caption{Elegant\LaTeX{} 系列模板捐赠榜}
     \begin{tabular}{cccccccc}
@@ -250,7 +251,7 @@ Let $z$ be some element of $xH \cap yH$.  Then $z = xa$ for some $a \in H$, and 
   \item \textit{如何删除日期？}\\
     需要注意的是，与版本 \lstinline{\version} 不同的是，导言区不写或注释 \lstinline{\date} 的话，仍然会打印出当日日期，原因是 \lstinline{\date} 有默认参数。如果不需要日期的话，日期可以留空即可，也即 \lstinline|\date{}|。
   \item \textit{如何获得中文日期？}\\
-    为了获得中文日期，必须在中文模式下\footnote{英文模式下，由于未加载中文宏包，无法输入中文。}，使用 \lstinline|\date{\zhdate{2019/10/11}}|，如果需要当天的汉化日期，可以使用 \lstinline|\date{\zhtoday}|，这两个命令都来源于 \href{https://ctan.org/pkg/zhnumber}{\lstinline{zhnumber}} 宏包。
+    为了获得中文日期，必须在中文模式下\footnote{英文模式下，由于未加载中文宏包，无法输入中文。}，使用 \lstinline|\date{\zhdate{2019/12/09}}|，如果需要当天的汉化日期，可以使用 \lstinline|\date{\zhtoday}|，这两个命令都来源于 \href{https://ctan.org/pkg/zhnumber}{\lstinline{zhnumber}} 宏包。
   \item \textit{如何添加多个作者？}\\
     在 \lstinline{\author} 里面使用 \lstinline{\and}，作者单位可以用 \lstinline{\\} 换行。
     \begin{lstlisting}
