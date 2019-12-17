@@ -188,19 +188,6 @@
 \def\bibfont{\footnotesize}
 
 
-% headings
-\RequirePackage{fancyhdr}
-\fancyhf{}
-\pagestyle{fancy}
-\rfoot{\footnotesize\textcolor{gray}{\thepage}}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
-
-\fancypagestyle{plain}{%
-  \renewcommand{\headrulewidth}{0pt}%
-  \fancyhf{}%
-  \fancyfoot[R]{
-    \footnotesize \textcolor{gray}{\thepage}}}
 
 \RequirePackage[flushmargin,stable]{footmisc}
 \setlength{\footnotesep}{12pt}
@@ -279,6 +266,22 @@
     footskip=0.6cm}}{%
   \relax}
 
+% headings
+\RequirePackage{fancyhdr}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{fancy-note}{
+  \fancyhf{} % clear header/footer settings
+  \fancyfoot[C]{\footnotesize\textcolor{gray}{\thepage}}
+}
+
+
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyfoot[R]{\footnotesize\textcolor{gray}{\thepage}}}
+
+\pagestyle{fancy-note}
 
 \ifdefstring{\ELEGANT@lang}{cn}{%
   \theoremstyle{plain}% default
