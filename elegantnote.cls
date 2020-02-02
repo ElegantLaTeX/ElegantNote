@@ -62,14 +62,12 @@
 
 \LoadClass{article}
 
-
-\RequirePackage{amsmath,amsthm}
 \PassOptionsToPackage{no-math}{fontspec}
+\RequirePackage{amsmath,amsthm}
+
 \ifdefstring{\ELEGANT@lang}{cn}{%
-  \RequirePackage[
-   UTF8,
-   scheme=plain,
-   punct=kaiming]{ctex}
+  \RequirePackage[UTF8,scheme=plain]{ctex}
+  \AfterEndPreamble{\renewcommand{\itshape}{\kaishu}}
   }{\relax}
 
 
@@ -148,25 +146,16 @@
 }
 
 \let\openbox\relax
-\newtheoremstyle{plain}{3pt}{3pt}{%
-  \ifdefstring{\ELEGANT@lang}{en}{%
-    \itshape}{%
-    \kaishu}}{}{%
+\newtheoremstyle{plain}{3pt}{3pt}{\itshape}{}{%
   \color{ecolor}\bfseries}{}{%
   0.5em}{%
   \thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
 
-\newtheoremstyle{definition}{3pt}{3pt}{%
-  \ifdefstring{\ELEGANT@lang}{en}{%
-    \itshape}{%
-    \kaishu}}{}{%
+\newtheoremstyle{definition}{3pt}{3pt}{\itshape}{}{%
   \color{ecolor}\bfseries}{}{%
   0.5em}{}
 
-\newtheoremstyle{remark}{3pt}{3pt}{
-  \ifdefstring{\ELEGANT@lang}{en}{
-    \itshape}{
-    \kaishu}}{}{
+\newtheoremstyle{remark}{3pt}{3pt}{\itshape}{}{
   \color{ecolor}\bfseries}{}{
   0.5em}{}
 
@@ -287,7 +276,7 @@
   \theoremstyle{plain}% default
   \newtheorem{theorem}{定理}[section] %
   \newtheorem{lemma}[theorem]{引理} %
-  \newtheorem{proposition}[theorem]{性质} %
+  \newtheorem{proposition}[theorem]{命题} %
   \newtheorem*{corollary}{推论} %
   \theoremstyle{definition} %
   \newtheorem{definition}{定义}[section] %
@@ -395,17 +384,11 @@
 
   \IfEmpty\version
   \else 
-    {\normalfont\ifdefstring{\ELEGANT@lang}{en}{
-    \itshape}{%
-    \kaishu}
-    \versiontext\the\version \\}
+    {\normalfont\itshape\versiontext\the\version \\}
   \fi
 	\ifx\@date\empty
 	\else 
-    {\normalfont\ifdefstring{\ELEGANT@lang}{en}{
-      \itshape}{%
-      \kaishu}
-      \updatetext\@date}%
+    {\normalfont\itshape\updatetext\@date}%
   \fi
   \end{center}%
   \par}
