@@ -1,6 +1,5 @@
 %!TEX program = xelatex
-\documentclass[cn,hazy,blue,screen,14pt]{elegantnote}
-
+\documentclass[cn,hazy,blue,14pt,screen,founder]{elegantnote}
 \title{ElegantNote：一个优美的 \LaTeX{} 笔记模板}
 
 \author{邓东升}
@@ -8,6 +7,8 @@
 
 \version{2.20}
 \date{\zhtoday}
+
+\usepackage{array}
 
 \begin{document}
 
@@ -221,7 +222,7 @@ Let $z$ be some element of $xH \cap yH$.  Then $z = xa$ for some $a \in H$, and 
   \small
   \centering
   \caption{Elegant\LaTeX{} 系列模板捐赠榜}
-    \begin{tabular}{cccccccc}
+    \begin{tabular}{*{8}{>{\scriptsize}c}}
     \toprule
     \textbf{捐赠者} & \textbf{金额} & \textbf{时间} & \textbf{渠道} & \textbf{捐赠者} & \textbf{金额} & \textbf{时间} & \textbf{渠道} \\
     \midrule

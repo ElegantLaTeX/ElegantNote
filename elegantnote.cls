@@ -9,7 +9,7 @@
 
 \RequirePackage{kvoptions}
 \RequirePackage{ifthen}
-\RequirePackage{ifxetex}
+% \RequirePackage{ifxetex}
 \RequirePackage{etoolbox}
 \RequirePackage{calc}
 
@@ -45,6 +45,11 @@
 \DeclareVoidOption{geye}{\ekv{mode=geye}}
 \DeclareVoidOption{hazy}{\ekv{mode=hazy}}
 
+\DeclareStringOption[ctexfont]{chinesefont}
+\DeclareVoidOption{ctexfont}{\ekv{chinesefont=ctexfont}}
+\DeclareVoidOption{founder}{\ekv{chinesefont=founder}}
+\DeclareVoidOption{nofont}{\ekv{chinesefont=nofont}}
+
 \DeclareStringOption[numbers]{cite}
 \DeclareVoidOption{numbers}{\ekv{cite=numbers}}
 \DeclareVoidOption{authoryear}{\ekv{cite=authoryear}}
@@ -65,30 +70,79 @@
 \PassOptionsToPackage{no-math}{fontspec}
 \RequirePackage{amsmath,amsthm}
 
+\RequirePackage{iftex}
+
 \ifdefstring{\ELEGANT@lang}{cn}{%
-  \RequirePackage[UTF8,scheme=plain]{ctex}
-  \AfterEndPreamble{\renewcommand{\itshape}{\kaishu}}
+\ifXeTeX
+    \ifdefstring{\ELEGANT@chinesefont}{founder}{
+      \RequirePackage[UTF8,scheme=plain,fontset=none]{ctex}
+      \setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong-Z01}
+      \setCJKsansfont[BoldFont={FZHei-B01},ItalicFont={FZHei-B01}]{FZHei-B01}
+      \setCJKmonofont[BoldFont={FZHei-B01},ItalicFont={FZHei-B01}]{FZFangSong-Z02}
+      \setCJKfamilyfont{zhsong}{FZShuSong-Z01}
+      \setCJKfamilyfont{zhhei}{FZHei-B01}
+      \setCJKfamilyfont{zhkai}{FZKai-Z03}
+      \setCJKfamilyfont{zhfs}{FZFangSong-Z02}
+      \newcommand*{\songti}{\CJKfamily{zhsong}}
+      \newcommand*{\heiti}{\CJKfamily{zhhei}}
+      \newcommand*{\kaishu}{\CJKfamily{zhkai}}
+      \newcommand*{\fangsong}{\CJKfamily{zhfs}}}{\relax}
+    
+    \ifdefstring{\ELEGANT@chinesefont}{nofont}{
+      \RequirePackage[UTF8,scheme=plain,fontset=none]{ctex}}{\relax}
+
+    \ifdefstring{\ELEGANT@chinesefont}{ctexfont}{
+      \RequirePackage[UTF8,scheme=plain]{ctex}}{\relax}
+  \else
+    \ifdefstring{\ELEGANT@chinesefont}{ctexfont}{
+      \RequirePackage[UTF8,scheme=plain]{ctex}}{\relax}
+  \fi
+  \AfterEndPreamble{
+  % \renewcommand{\itshape}{\kaishu}
+  \setlength\parindent{2\ccwd}}
   }{\relax}
+
+
+\ifcsname kaishu\endcsname
+  \newcommand{\citshape}{\kaishu}
+\else
+  \newcommand{\citshape}{\itshape}
+\fi
+
+\ifcsname fangsong\endcsname
+  \newcommand{\cfs}{\fangsong}
+\else
+  \newcommand{\cfs}{\normalfont}
+\fi
 
 
 % newtxtext and newtxmath pkg
 \RequirePackage{newtxtext}
-\RequirePackage{newtxmath}
-\RequirePackage{esint}
+% \RequirePackage{newtxmath}
 
-%%% use yhmath pkg, uncomment following code
-% \let\oldwidering\widering
-% \let\widering\undefined
-% \RequirePackage{yhmath}
-% \let\widering\oldwidering
+\ifdefstring{\ELEGANT@math}{mtpro2}{
+  \let\Bbbk\relax
+  \RequirePackage[lite]{mtpro2}
+}{\relax}
 
-%%% use esvect pkg, uncomment following code
-% \RequirePackage{esvect}
+\ifdefstring{\ELEGANT@math}{newtx}{
+  \RequirePackage{newtxmath}
+  \let\Bbbk\relax
+  \RequirePackage{esint}
+  %%% use yhmath pkg, uncomment following code
+  % \let\oldwidering\widering
+  % \let\widering\undefined
+  % \RequirePackage{yhmath}
+  % \let\widering\oldwidering
 
-\DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}
-\let\sumop\relax\let\prodop\relax
-\DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
-\DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"51}
+  %%% use esvect pkg, uncomment following code
+  % \RequirePackage{esvect}
+
+  \DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}
+  \let\sumop\relax\let\prodop\relax
+  \DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
+  \DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"51}
+}{\relax}
 
 \RequirePackage{indentfirst}
 \RequirePackage{anyfontsize}
@@ -146,16 +200,16 @@
 }
 
 \let\openbox\relax
-\newtheoremstyle{plain}{3pt}{3pt}{\itshape}{}{%
+\newtheoremstyle{plain}{\topsep}{\topsep}{\citshape}{}{%
   \color{ecolor}\bfseries}{}{%
   0.5em}{%
   \thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
 
-\newtheoremstyle{definition}{3pt}{3pt}{\itshape}{}{%
+\newtheoremstyle{definition}{\topsep}{\topsep}{\citshape}{}{%
   \color{ecolor}\bfseries}{}{%
   0.5em}{}
 
-\newtheoremstyle{remark}{3pt}{3pt}{\itshape}{}{
+\newtheoremstyle{remark}{\topsep}{\topsep}{\citshape}{}{
   \color{ecolor}\bfseries}{}{
   0.5em}{}
 
@@ -206,7 +260,6 @@
 \definecolor{ecyan}{RGB}{0,175,152}
 \definecolor{eblue}{RGB}{20,50,104}
 \definecolor{sakura}{RGB}{255,183,197}
-% \definecolor{black}{RGB}{255,183,197}
 
 %% device settings
 %% default=pad
@@ -265,12 +318,12 @@
   \fancyfoot[C]{\footnotesize\textcolor{gray}{\thepage}}
 }
 
-
 \fancypagestyle{plain}{%
   \fancyhf{}
   \fancyfoot[R]{\footnotesize\textcolor{gray}{\thepage}}}
 
 \pagestyle{fancy-note}
+
 
 \ifdefstring{\ELEGANT@lang}{cn}{%
   \theoremstyle{plain}% default
@@ -384,11 +437,11 @@
 
   \IfEmpty\version
   \else 
-    {\normalfont\itshape\versiontext\the\version \\}
+    {\normalfont\citshape\versiontext\the\version \\}
   \fi
 	\ifx\@date\empty
 	\else 
-    {\normalfont\itshape\updatetext\@date}%
+    {\normalfont\citshape\updatetext\@date}%
   \fi
   \end{center}%
   \par}

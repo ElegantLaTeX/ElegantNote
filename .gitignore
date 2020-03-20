@@ -13,6 +13,7 @@
 .*.lb
 elegantnote-en.pdf
 elegantnote-cn.pdf
+clean.bat
 
 ## Intermediate documents:
 *.dvi
