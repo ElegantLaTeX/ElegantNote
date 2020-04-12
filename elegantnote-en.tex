@@ -5,7 +5,7 @@
 \author{Dongsheng Deng}
 \institute{Elegant\LaTeX{} Program}
 
-\version{2.20}
+\version{2.30}
 \date{\today}
 
 \begin{document}
@@ -25,9 +25,13 @@ The new template has the following features:
   \item languages support: Chinese (default), English;
   \item support \hologo{pdfLaTeX} and \hologo{XeLaTeX};
   \item prettier captions, list environments, and unified fonts;
-  \item custmized global font size: 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt and 20pt.
+  \item custmized global font size: 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt and 20pt;
+  \item support for math font options for \lstinline{newtx} and \lstinline{mtpro2};
+  \item with the option of \lstinline{bibstyle} (default: apalike) for changing style of bibliography;
+  \item change the citation style with \lstinline{cite} option: \lstinline{authoryear}, \lstinline{numbers} and \lstinline{super}.
 \end{itemize}
 
+This update is to resolve \TeX{} Live 2020 compilation errors caused by \lstinline{gbt7714} compatibility issues.
 
 \subsection{Optional Modes}
 
@@ -78,6 +82,17 @@ You can also select the device by using a direct assignment method, such as:
 \begin{note}
 To get a normal A4paper size PDF, please select \lstinline{device=normal}.
 \end{note}
+
+\subsection{Math Fonts}
+
+This template defines a new option (\lstinline{math}), with three options:
+
+\begin{enumerate}
+  \item \lstinline{math=cm} (default), use \LaTeX{} default math font (recommended).
+  \item \lstinline{math=newtx}, use \lstinline{newtxmath} math font (may bring about bugs).
+  \item \lstinline{math=mtpro2}, use \lstinline{mtpro2} package to set math font.
+\end{enumerate}
+
 
 \subsection[Color Themes]{Color Themes\footnote{Test for chapter footnote.}}
 
@@ -205,10 +220,10 @@ So far, Elegant\LaTeX{} has four support members:
 Thank them all!!!
 
 \section{Acknowledgement}
-The number of stars on Github for ElegantPaper reached 176 on Dec. 8, 2019 at the release of ElegantNote v2.40.
+The number of stars on GitHub for ElegantPaper reached 176 on April 12, 2020 at the release of ElegantNote v2.20.
 Thank China\TeX{} and \href{http://www.latexstudio.net/}{\LaTeX{} studio} for their promotion. 
 
-If you like our templates, star on Github.
+If you like our templates, star on GitHub.
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\textwidth]{star.png}
@@ -226,24 +241,40 @@ To express your love for our templates and/or our developers, please do not hesi
 
 \begin{table}[htbp]
   \centering
-  \small
+  \scriptsize
   \caption{Donation List}
     \begin{tabular}{cccccccc}
     \toprule
     \textbf{Tipper} & \textbf{Amount} & \textbf{Date} & \textbf{Channel} & \textbf{Tipper} & \textbf{Amount} & \textbf{Date} & \textbf{Channel} \\
     \midrule
-    Lerh  & 10 RMB & 2019/5/15 & Wechat & LIU ZhiKuo & 100 RMB & 2019/10/15 & Alipay \\
-    YueGuoDiPingXian & 10 RMB & 2019/5/15 & Wechat & * Tao & 16 RMB & 2019/10/17 & Wechat \\
-    YinSang & 20 RMB & 2019/5/27 & Wechat & ChiHong & 12 RMB & 2019/10/17 & Alipay \\
-    * Kong & 10 RMB & 2019/5/30 & Wechat & YuanFengJing & 10 RMB & 2019/10/28 & Wechat \\
-    latexstudio.net & 666 RMB & 2019/6/05 & Alipay & GUO DeLiang & 88 RMB & 2019/11/03 & Wechat \\
-    Cassis & 11 RMB & 2019/6/30 & Wechat & ZiQiangBuXi & 20 RMB & 2019/11/03 & Alipay \\
-    * Jun & 10 RMB & 2019/7/23 & Wechat & DuShuZhiChong & 20 RMB & 2019/11/18 & Wechat \\
-    P*u   & 50 RMB & 2019/7/30 & Wechat & * Deng & 10 RMB & 2019/11/18 & Wechat \\
-    * Meng & 19 RMB & 2019/8/28 & Wechat & * Zhe & 20 RMB & 2019/11/18 & Wechat \\
-    QuDouDou & 10 RMB & 2019/8/28 & Wechat & anonymous & 10 RMB & 2019/11/24 & Wechat \\
-    LI Bo & 100 RMB & 2019/10/06 & Wechat & Jiye Qian & 66 RMB & 2019/12/04 & Wechat \\
-    Njustsll & 10 RMB & 2019/10/11 & Wechat & Boy Yang & 20 RMB & 2019/12/05 & Wechat \\
+    Lerh  & 10 RMB & 2019/05/15 & Wechat    & yueguodipingxian & 10 RMB & 2019/05/15 & Wechat \\
+	  yinsang    & 20 RMB & 2019/05/27 & Wechat    & *kong    & 10 RMB & 2019/05/30 & Wechat \\
+	  latexstudio.net & 666 RMB & 2019/06/05 & Alipay   & A*n   & 40 RMB & 2019/06/15 & Wechat \\
+	  * xia   & 22 RMB & 2019/06/15 & Wechat    & * qian  & 21 RMB  & 2019/06/15 & Wechat \\
+	  Cassis & 11 RMB & 2019/06/30 & Wechat    & * jun    & 10 RMB & 2019/07/23 & Wechat \\
+	  P*u   & 50 RMB & 2019/07/30 & Wechat    & * meng    & 19 RMB & 2019/08/28 & Wechat \\
+	  Qu Doudou   & 10 RMB & 2019/08/28 & Wechat    & Li Bo    & 100 RMB & 2019/10/06 & Wechat \\
+	  Njustsll & 10 RMB & 2019/10/11 & Wechat    & Liu Zhikuo   & 99.99 RMB & 2019/10/15 & Alipay \\
+	  * tao   & 16 RMB & 2019/10/17 & Wechat    & Chini    & 12 RMB & 2019/10/17 & Alipay \\
+	  yuanfengjing & 10 RMB & 2019/10/28 & Wechat    & Guo Deliang   & 88 RMB & 2019/11/03 & Wechat \\
+	  ziqiangbuxi  & 20 RMB & 2019/11/04 & Alipay   & dushuzhichong  & 20 RMB & 2019/11/18 & Wechat \\
+	  * deng    & 10 RMB & 2019/11/18 & Wechat    & * zhe   & 20 RMB & 2019/11/18 & Wechat \\
+	  anonymous    & 10 RMB & 2019/11/24 & Wechat    & Jiye Qian & 66 RMB & 2019/12/04 & Wechat \\
+	  * yang   & 20 RMB & 2019/12/05 & Wechat    & Catcher & 11 RMB & 2019/12/08 & Alipay \\
+	  xierbotementu & 10 RMB & 2019/12/09 & Alipay   & * wei   & 10 RMB & 2019/12/09 & Wechat \\
+	  Simon & 20 RMB & 2019/12/11 & Alipay   & liushangqianyi & 66.60 RMB & 2019/12/18 & Alipay \\
+	  yu     & 10 RMB & 2019/12/20 & Alipay   & *chen   & 15 RMB & 2019/12/20 & Wechat \\
+	  suifeng   & 20 RMB & 2019/12/27 & Alipay   & Ws    & 23.30 RMB & 2019/12/28 & Wechat \\
+	  chuba    & 100 RMB  & 2020/01/02 & Alipay   & p*e   & 20 RMB & 2020/01/03 & Wechat \\
+	  Shunmx & 100 RMB & 2020/01/03 & Wechat    & hj    & 10 RMB & 2020/01/03 & Wechat \\
+	  F*5   & 10 RMB & 2020/01/03 & Wechat    & S*m   & 20.20 RMB & 2020/01/03 & Wechat \\
+	  erdaiqingzhi  & 13 RMB & 2020/01/14 & Alipay   & *?    & 66 RMB & 2020/01/15 & Wechat \\
+	  Mr. Xiong & 20 RMB & 2020/01/17 & Wechat    & *bo    & 15 RMB & 2020/01/18 & Wechat \\
+	  *Zhe    & 10 RMB & 2020/02/02 & Wechat    &  Jackie &  88.80 RMB  &  2020/02/09 & Wechat \\
+	  Henry\_Sun & 50 RMB & 2020/02/14 & Alipay & * Qiao  & 50 RMB & 2020/02/21 & Wechat \\
+	  YunLian & 10 RMB & 2020/03/02 & Alipay & S*y  &  10 RMB  &  2020/03/15 & Wechat \\
+	  * Ge  & 66.66 RMB & 2020/03/17 & Wechat    &   K*e & 30 RMB & 2020/03/30 & Wechat\\
+	  * Yang  &  20 RMB  &  2020/04/02 & Wechat & Shi*n  & 30 RMB & 2020/04/11 & Wechat \\
 \bottomrule
 \end{tabular}%
   \label{tab:donation}%
@@ -264,26 +295,5 @@ To express your love for our templates and/or our developers, please do not hesi
     \end{lstlisting}
 \end{enumerate}
 
-\section{A Minimal Example}
-
-\begin{lstlisting}
-\documentclass[en,hazy,blue,screen,14pt]{elegantnote}
-
-\title{ElegantNote Example}
-\author{ddswhu}
-\institute{Elegant\LaTeX{} Program}
-% \version{1.00}
-\date{}
-
-\begin{document}
-
-\maketitle
-
-\section{Introduction}
-
-The content of Introduction.
-
-\end{document}
-\end{lstlisting}
 
 \end{document}

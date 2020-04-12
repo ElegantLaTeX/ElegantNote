@@ -4,44 +4,35 @@
 % Lastest Version: https://github.com/ElegantLaTeX/ElegantNote
 
 % --- Class structure: identification part
-\ProvidesClass{elegantnote}[2018/12/08 ElegantNote v2.20 class]
+\ProvidesClass{elegantnote}[2020/04/12 ElegantNote v2.30 class]
 \NeedsTeXFormat{LaTeX2e}
 
 \RequirePackage{kvoptions}
-\RequirePackage{ifthen}
-% \RequirePackage{ifxetex}
 \RequirePackage{etoolbox}
 \RequirePackage{calc}
 
-\SetupKeyvalOptions{
-  family=ELEGANT,
-  prefix=ELEGANT@, 
-  setkeys=\kvsetkeys}
-
+\SetupKeyvalOptions{family=ELEGANT,prefix=ELEGANT@,setkeys=\kvsetkeys}
 \newcommand{\ekv}[1]{\kvsetkeys{ELEGANT}{#1}}
 
-% ----- Colors -----
 \DeclareStringOption[blue]{color}
-\DeclareStringOption[pad]{device}
-\DeclareStringOption[cn]{lang}
-\DeclareStringOption{mode}
-% ----- backward compatibility
 \DeclareVoidOption{green}{\ekv{color=green}}
 \DeclareVoidOption{cyan}{\ekv{color=cyan}}
 \DeclareVoidOption{blue}{\ekv{color=blue}}
 \DeclareVoidOption{sakura}{\ekv{color=sakura}}
 \DeclareVoidOption{black}{\ekv{color=black}}
 
-
+\DeclareStringOption[pad]{device}
 \DeclareVoidOption{pc}{\ekv{device=pc}}
 \DeclareVoidOption{pad}{\ekv{device=pad}}
 \DeclareVoidOption{kindle}{\ekv{device=kindle}}
 \DeclareVoidOption{normal}{\ekv{device=normal}}
 \DeclareVoidOption{screen}{\ekv{device=screen}}
 
+\DeclareStringOption[cn]{lang}
 \DeclareVoidOption{cn}{\ekv{lang=cn}}
 \DeclareVoidOption{en}{\ekv{lang=en}}
 
+\DeclareStringOption{mode}
 \DeclareVoidOption{geye}{\ekv{mode=geye}}
 \DeclareVoidOption{hazy}{\ekv{mode=hazy}}
 
@@ -55,10 +46,17 @@
 \DeclareVoidOption{authoryear}{\ekv{cite=authoryear}}
 \DeclareVoidOption{super}{\ekv{cite=super}}
 
+\DeclareStringOption[apalike]{bibstyle}
+
 \DeclareStringOption[11pt]{fontsize}
 \DeclareVoidOption{10pt}{\ekv{fontsize=10pt}}
 \DeclareVoidOption{11pt}{\ekv{fontsize=11pt}}
 \DeclareVoidOption{12pt}{\ekv{fontsize=12pt}}
+
+\DeclareStringOption[cm]{math}
+\DeclareVoidOption{newtx}{\ekv{math=newtx}}
+\DeclareVoidOption{mtpro2}{\ekv{math=mtpro2}}
+\DeclareVoidOption{cm}{\ekv{math=cm}}
 
 \DeclareDefaultOption{
   \PassOptionsToClass{\CurrentOption}{article}
@@ -108,7 +106,11 @@
 \else
   \newcommand{\citshape}{\itshape}
 \fi
-
+\ifcsname kaishu\endcsname
+  \newcommand{\cnormal}{\kaishu}
+\else
+  \newcommand{\cnormal}{\normalfont}
+\fi
 \ifcsname fangsong\endcsname
   \newcommand{\cfs}{\fangsong}
 \else
@@ -116,15 +118,7 @@
 \fi
 
 
-% newtxtext and newtxmath pkg
 \RequirePackage{newtxtext}
-% \RequirePackage{newtxmath}
-
-\ifdefstring{\ELEGANT@math}{mtpro2}{
-  \let\Bbbk\relax
-  \RequirePackage[lite]{mtpro2}
-}{\relax}
-
 \ifdefstring{\ELEGANT@math}{newtx}{
   \RequirePackage{newtxmath}
   \let\Bbbk\relax
@@ -143,6 +137,7 @@
   \DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
   \DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"51}
 }{\relax}
+
 
 \RequirePackage{indentfirst}
 \RequirePackage{anyfontsize}
@@ -209,10 +204,9 @@
   \color{ecolor}\bfseries}{}{%
   0.5em}{}
 
-\newtheoremstyle{remark}{\topsep}{\topsep}{\citshape}{}{
+\newtheoremstyle{remark}{\topsep}{\topsep}{\cnormal}{}{
   \color{ecolor}\bfseries}{}{
   0.5em}{}
-
 
 % caption settings 
 \RequirePackage{caption} 
@@ -224,13 +218,6 @@
 % list/itemize/enumerate setting
 \RequirePackage[shortlabels,inline]{enumitem}
 \setlist{nolistsep}
-
-
-\RequirePackage[sort&compress]{natbib}
-\setlength{\bibsep}{0.0pt}
-\def\bibfont{\footnotesize}
-
-
 
 \RequirePackage[flushmargin,stable]{footmisc}
 \setlength{\footnotesep}{12pt}
@@ -349,8 +336,13 @@
   \setlength{\parindent}{2em}
   \newcommand{\keywords}[1]{%
     \vskip2ex\par\noindent\normalfont{\bfseries 关键词: } #1}
-  \RequirePackage[\ELEGANT@cite]{gbt7714}}{%
-  \relax}
+  \RequirePackage{gbt7714}
+  \ifdefstring{\ELEGANT@cite}{authoryear}{
+    \bibliographystyle{gbt7714-author-year}}{
+    \bibliographystyle{gbt7714-numerical}}
+  \ifdefstring{\ELEGANT@cite}{numbers}{
+    \citestyle{numbers}}{\relax}
+  }{\relax}
 
 \ifdefstring{\ELEGANT@lang}{en}{
   \theoremstyle{plain}% default
@@ -370,9 +362,12 @@
     \normalfont\bfseries\color{ecolor} Proof}
   \newcommand\versiontext{Version: }%
   \newcommand\updatetext{Update: }%
-  \bibliographystyle{aer}}{%
+  \RequirePackage[\ELEGANT@cite,sort&compress]{natbib}
+  \bibliographystyle{\ELEGANT@bibstyle}}{%
   \relax}
 
+\setlength{\bibsep}{0.0pt}
+\def\bibfont{\footnotesize}
 
 \def\IfEmpty#1{%
   \edef\1{\the#1}
@@ -473,7 +468,7 @@
 \lstdefinestyle{estyle}{
   basicstyle=%
     \ttfamily
-    \lst@ifdisplaystyle\footnotesize\fi}
+    \lst@ifdisplaystyle\small\fi}
 
 % \lstset{
 %   basicstyle=\scriptsize\ttfamily,
@@ -520,11 +515,16 @@
     device,
     color,
     mode,
+    chinesefont,
+    cite,
+    bibstyle,
+    math,
     lang,
     amsthm},
   emphstyle={\color{frenchplum}},
   morekeywords={%
     DeclareSymbolFont,
+    setCJKfamilyfont,
     SetSymbolFont,
     toprule,
     midrule,

@@ -1,11 +1,11 @@
 %!TEX program = xelatex
-\documentclass[cn,hazy,blue,14pt,screen,founder]{elegantnote}
+\documentclass[cn,hazy,blue,14pt,screen]{elegantnote}
 \title{ElegantNote：一个优美的 \LaTeX{} 笔记模板}
 
 \author{邓东升}
 \institute{Elegant\LaTeX{} Program}
 
-\version{2.20}
+\version{2.30}
 \date{\zhtoday}
 
 \usepackage{array}
@@ -21,19 +21,25 @@
 
 \section{ElegantNote 使用说明}
 
-新版 ElegantNote 是基于标准的 \LaTeX{} 文类 article 重新设计的，格式更加简化的笔记模板！本模板支持两种编译方式，\hologo{pdfLaTeX} 和 \hologo{XeLaTeX}\footnote{模板测试环境为 Win10 + \TeX{} Live 2019。}，英文模式下请使用 \hologo{pdfLaTeX} 进行编译，中文模式下推荐使用 \hologo{XeLaTeX}。
+新版 ElegantNote 是基于标准的 \LaTeX{} 文类 article 重新设计的，格式更加简化的笔记模板！本模板支持两种编译方式，\hologo{pdfLaTeX} 和 \hologo{XeLaTeX}，英文模式下请使用 \hologo{pdfLaTeX} 进行编译，中文模式下推荐使用 \hologo{XeLaTeX}。
 
 新模板有下面几个特性：
+
 \begin{itemize}
   \item 纸张模式：护眼模式（geye）和朦胧模式（hazy）；
-  \item 适配不同设备，包括 Pad（默认），Screen\footnote{\textcolor{red}{本次更新新增内容。}}（幻灯片），Kindle，PC（双页），通用（A4 纸张）；
+  \item 适配不同设备，包括 Pad（默认），Screen（幻灯片），Kindle，PC（双页），通用（A4 纸张）；
   \item 5 套颜色主题，分别是：\textcolor{eblue}{blue}（默认）、\textcolor{egreen}{green}、\textcolor{ecyan}{cyan}、 \textcolor{sakura}{sakura} 和 \textcolor{black}{black}；
   \item 语言支持：中文（默认），英文；
   \item 支持 \hologo{pdfLaTeX} 和 \hologo{XeLaTeX} 编译；
   \item 更加美观的图表标题格式，列表环境，数学字体等；
-  \item 全局字体大小支持：8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 和 20pt。
+  \item 全局字体大小支持：8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 和 20pt；
+  \item 支持 \lstinline{newtx} 以及 \lstinline{mtpro2} 数学字体设置； 
+  \item 中文字体支持方正字体或者自定义字体；
+  \item 英文模式通过 \lstinline{bibstyle} 选项（默认为 \lstinline{apalike}）支持参考文献格式修改；
+  \item 支持参考格式显示格式修改 \lstinline{cite} 可选为 \lstinline{authoryear}、\lstinline{numbers} （默认）和 \lstinline{super}。
 \end{itemize}
 
+本次更新：修复 \TeX{} Live 2020 更新之后因 \lstinline{gbt7714} 宏包更新用法导致模板出错的问题。
 
 \subsection{模板模式}
 
@@ -82,6 +88,51 @@
 \begin{note}
   如果想要正常的 A4 大小的 PDF，需要选择 \lstinline{device=normal}。
 \end{note}
+
+
+\subsection{数学字体选项}
+
+本模板定义了一个数学字体选项（\lstinline{math}），可选项有三个：
+\begin{enumerate}
+  \item \lstinline{math=cm}（默认），使用 \LaTeX{} 默认数学字体（推荐，无需声明）；
+  \item \lstinline{math=newtx}，使用 \lstinline{newtxmath} 设置数学字体（潜在问题比较多）。
+  \item \lstinline{math=mtpro2}，使用 \lstinline{mtpro2} 宏包设置数学字体，要求用户已经成功安装此宏包。
+\end{enumerate}
+
+
+\subsection{中文字体选项}
+模板提供中文字体选项 \lstinline{chinesefont}，可选项有
+\begin{enumerate}
+\item \lstinline{ctexfont}：默认选项，使用 \lstinline{ctex} 宏包根据系统自行选择字体，可能存在字体缺失的问题，更多内容参考 \lstinline{ctex} 宏包\href{https://ctan.org/pkg/ctex}{官方文档}\footnote{可以使用命令提示符，输入 \lstinline{texdoc ctex} 调出本地 \lstinline{ctex} 宏包文档}。
+\item \lstinline{founder}：方正字体选项，调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，然后设置字体为方正四款免费字体，方正字体下载注意事项见后文。
+\item \lstinline{nofont}：调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，不设定中文字体，用户可以自行设置中文字体，具体见后文。
+\end{enumerate}
+
+\noindent \textbf{注意：} 使用 \lstinline{founder} 选项或者 \lstinline{nofont} 时，必须使用 \hologo{XeLaTeX} 进行编译。
+
+\subsubsection{方正字体选项}
+由于使用 \lstinline{ctex} 宏包默认调用系统已有的字体，部分系统字体缺失严重，因此，用户希望能够使用其它字体，我们推荐使用方正字体。方正的{\songti 方正书宋}、{\heiti 方正黑体}、{\kaishu 方正楷体}、{\fangsong 方正仿宋}四款字体均可免费试用，且可用于商业用途。用户可以自行从\href{http://www.foundertype.com/}{方正字体官网}下载此四款字体，在下载的时候请\textbf{务必}注意选择 GBK 字符集，也可以使用 \href{https://www.latexstudio.net/}{\LaTeX{} 工作室}提供的\href{https://pan.baidu.com/s/1BgbQM7LoinY7m8yeP25Y7Q}{方正字体，提取码为：njy9} 进行安装。安装时，{\kaishu Win 10 用户请右键选择为全部用户安装，否则会找不到字体。}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.9\textwidth]{founder.png}
+\end{figure}
+
+\subsubsection{其他中文字体}
+如果你想完全自定义字体\footnote{这里仍然以方正字体为例。}，你可以选择 \lstinline{chinesefont=nofont}，然后在导言区设置
+\begin{lstlisting}
+\setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong-Z01}
+\setCJKsansfont[BoldFont={FZHei-B01},ItalicFont={FZHei-B01}]{FZHei-B01}
+\setCJKmonofont[BoldFont={FZHei-B01},ItalicFont={FZHei-B01}]{FZFangSong-Z02}
+\setCJKfamilyfont{zhsong}{FZShuSong-Z01}
+\setCJKfamilyfont{zhhei}{FZHei-B01}
+\setCJKfamilyfont{zhkai}{FZKai-Z03}
+\setCJKfamilyfont{zhfs}{FZFangSong-Z02}
+\newcommand*{\songti}{\CJKfamily{zhsong}}
+\newcommand*{\heiti}{\CJKfamily{zhhei}}
+\newcommand*{\kaishu}{\CJKfamily{zhkai}}
+\newcommand*{\fangsong}{\CJKfamily{zhfs}}
+\end{lstlisting}
 
 
 \subsection[颜色主题]{颜色主题\footnote{测试章节脚注。}}
@@ -188,7 +239,7 @@ Let $z$ be some element of $xH \cap yH$.  Then $z = xa$ for some $a \in H$, and 
 目前 ElegantLaTeX 共有 4 名协作人员，分别是
 \begin{itemize}
   \item 官方文档翻译: \href{https://github.com/peggy2006xzyz}{YPY};
-  \item Github 维基维护: \href{https://github.com/izinngo}{Ingo Zinngo}、\href{https://github.com/xiaohao890809}{追寻原风景};
+  \item GitHub 维基维护: \href{https://github.com/izinngo}{Ingo Zinngo}、\href{https://github.com/xiaohao890809}{追寻原风景};
   \item QQ 群管理员: \href{https://github.com/sikouhjw}{Sikouhjw}.
 \end{itemize}
 
@@ -197,9 +248,8 @@ Let $z$ be some element of $xH \cap yH$.  Then $z = xa$ for some $a \in H$, and 
 
 \section{致谢}
 
-截止到 2019 年 12 月 08 日，ElegantNote 2.40 版本发布，ElegantNote 模板在 Github 上的收藏数（star）达到了 176。在此特别感谢 China\TeX{} 以及 \href{http://www.latexstudio.net/}{\LaTeX{} 工作室}对于本系列模板的大力宣传与推广。
+截止到 2020 年 04 月 12 日，ElegantNote 2.30 版本发布，ElegantNote 模板在 GitHub 上的收藏数（star）达到了 263。在此特别感谢 China\TeX{} 以及 \href{http://www.latexstudio.net/}{\LaTeX{} 工作室}对于本系列模板的大力宣传与推广。如果你喜欢我们的模板，你可以在 GitHub 上收藏（Star）我们的模板。
 
-如果你喜欢我们的模板，你可以在 Github 上收藏（Star）我们的模板。
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{star.png}
@@ -219,25 +269,41 @@ Let $z$ be some element of $xH \cap yH$.  Then $z = xa$ for some $a \in H$, and 
 \textbf{赞赏费用的使用解释权归 Elegant\LaTeX{} 所有，并且不接受监督，请自愿理性打赏}。10 元以上的赞赏，我们将列入捐赠榜，并且发放捐赠纪念证（全部），谢谢各位金主！
 
 \begin{table}[htbp]
-  \small
+  \scriptsize
   \centering
   \caption{Elegant\LaTeX{} 系列模板捐赠榜}
     \begin{tabular}{*{8}{>{\scriptsize}c}}
     \toprule
     \textbf{捐赠者} & \textbf{金额} & \textbf{时间} & \textbf{渠道} & \textbf{捐赠者} & \textbf{金额} & \textbf{时间} & \textbf{渠道} \\
     \midrule
-    Lerh  & 10 RMB & 2019/5/15 & 微信    & 刘志阔   & 99.99 RMB & 2019/10/15 & 支付宝 \\
-    越过地平线 & 10 RMB & 2019/5/15 & 微信    & *涛    & 16 RMB & 2019/10/17 & 微信 \\
-    银桑    & 20 RMB & 2019/5/27 & 微信    & 赤霓    & 12 RMB & 2019/10/17 & 支付宝 \\
-    *空    & 10 RMB & 2019/5/30 & 微信    & 追寻原风景 & 10 RMB & 2019/10/28 & 微信 \\
-    latexstudio.net & 666 RMB & 2019/6/5 & 支付宝   & 郭德良   & 88 RMB & 2019/11/3 & 微信 \\
-    Cassis & 11 RMB & 2019/6/30 & 微信    & 自强不息  & 20 RMB & 2019/11/4 & 支付宝 \\
-    *君    & 10 RMB & 2019/7/23 & 微信    & 读书之虫  & 20 RMB & 2019/11/18 & 微信 \\
-    P*u   & 50 RMB & 2019/7/30 & 微信    & *等    & 10 RMB & 2019/11/18 & 微信 \\
-    *萌    & 19 RMB & 2019/8/28 & 微信    & *哲    & 20 RMB & 2019/11/18 & 微信 \\
-    曲豆豆   & 10 RMB & 2019/8/28 & 微信    & 佚名    & 10 RMB & 2019/11/24 & 微信 \\
-    李博    & 100 RMB & 2019/10/6 & 微信    & Jiye Qian & 66 RMB & 2019/12/4 & 微信 \\
-    Njustsll & 10 RMB & 2019/10/11 & 微信    & 阳仔    & 20 RMB & 2019/12/5 & 微信 \\
+    Lerh  & 10 RMB & 2019/05/15 & 微信    & 越过地平线 & 10 RMB & 2019/05/15 & 微信 \\
+    银桑    & 20 RMB & 2019/05/27 & 微信    & *空    & 10 RMB & 2019/05/30 & 微信 \\
+    latexstudio.net & 666 RMB & 2019/06/05 & 支付宝   & A*n   & 40 RMB & 2019/06/15 & 微信 \\
+    * 夏   & 22 RMB & 2019/06/15 & 微信    & * 倩   & 21 RMB  & 2019/06/15 & 微信 \\
+    Cassis & 11 RMB & 2019/06/30 & 微信    & *君    & 10 RMB & 2019/07/23 & 微信 \\
+    P*u   & 50 RMB & 2019/07/30 & 微信    & *萌    & 19 RMB & 2019/08/28 & 微信 \\
+    曲豆豆   & 10 RMB & 2019/08/28 & 微信    & 李博    & 100 RMB & 2019/10/06 & 微信 \\
+    Njustsll & 10 RMB & 2019/10/11 & 微信    & 刘志阔   & 99.99 RMB & 2019/10/15 & 支付宝 \\
+    * 韬   & 16 RMB & 2019/10/17 & 微信    & 赤霓    & 12 RMB & 2019/10/17 & 支付宝 \\
+    追寻原风景 & 10 RMB & 2019/10/28 & 微信    & 郭德良   & 88 RMB & 2019/11/03 & 微信 \\
+    自强不息  & 20 RMB & 2019/11/04 & 支付宝   & 读书之虫  & 20 RMB & 2019/11/18 & 微信 \\
+    *等    & 10 RMB & 2019/11/18 & 微信    & *哲    & 20 RMB & 2019/11/18 & 微信 \\
+    佚名    & 10 RMB & 2019/11/24 & 微信    & Jiye Qian & 66 RMB & 2019/12/04 & 微信 \\
+    * 阳   & 20 RMB & 2019/12/05 & 微信    & Catcher & 11 RMB & 2019/12/08 & 支付宝 \\
+    希尔波特门徒 & 10 RMB & 2019/12/09 & 支付宝   & * 伟   & 10 RMB & 2019/12/09 & 微信 \\
+    Simon & 20 RMB & 2019/12/11 & 支付宝   & 流殇丶浅忆 & 66.60 RMB & 2019/12/18 & 支付宝 \\
+    羽     & 10 RMB & 2019/12/20 & 支付宝   & * 琛   & 15 RMB & 2019/12/20 & 微信 \\
+    随风    & 20 RMB & 2019/12/27 & 支付宝   & Ws    & 23.30 RMB & 2019/12/28 & 微信 \\
+    初八    & 100 RMB  & 2020/01/02 & 支付宝   & p*e   & 20 RMB & 2020/01/03 & 微信 \\
+    Shunmx & 100 RMB & 2020/01/03 & 微信    & hj    & 10 RMB & 2020/01/03 & 微信 \\
+    F*5   & 10 RMB & 2020/01/03 & 微信    & S*m   & 20.20 RMB & 2020/01/03 & 微信 \\
+    二代青雉  & 13 RMB & 2020/01/14 & 支付宝   & *?    & 66 RMB & 2020/01/15 & 微信 \\
+    Mr. Xiong & 20 RMB & 2020/01/17 & 微信    & *博    & 15 RMB & 2020/01/18 & 微信 \\
+    * 者  & 10 RMB & 2020/02/02 & 微信    & Jackie  &  88.80 RMB  &  2020/02/09 & 微信 \\
+    Henry\_Sun、 & 50 RMB & 2020/02/14 & 支付宝 & * 桥  & 50 RMB & 2020/02/21 & 微信 \\
+    昀琏 & 10 RMB & 2020/03/02 & 支付宝 & S*y  &  10 RMB  &  2020/03/15 & 微信 \\
+    * 哥  & 66.66 RMB & 2020/03/17 & 微信    &   K*e & 30 RMB & 2020/03/30 & 微信\\
+    * 阳  &  20 RMB  &  2020/04/02 & 微信 & 士*n  & 30 RMB & 2020/04/11 & 微信 \\
     \bottomrule
     \end{tabular}%
   \label{tab:donation}%
@@ -250,37 +316,14 @@ Let $z$ be some element of $xH \cap yH$.  Then $z = xa$ for some $a \in H$, and 
   \item \textit{如何删除版本信息？}\\
     导言区不写 \lstinline|\version{x.xx}| 即可。
   \item \textit{如何删除日期？}\\
-    需要注意的是，与版本 \lstinline{\version} 不同的是，导言区不写或注释 \lstinline{\date} 的话，仍然会打印出当日日期，原因是 \lstinline{\date} 有默认参数。如果不需要日期的话，日期可以留空即可，也即 \lstinline|\date{}|。
+    与版本 \lstinline{\version} 不同的是，导言区不写或注释 \lstinline{\date} 的话，仍然会打印出当日日期，原因是 \lstinline{\date} 有默认参数。如果不需要日期的话，日期可以留空即可，也即 \lstinline|\date{}|。
   \item \textit{如何获得中文日期？}\\
-    为了获得中文日期，必须在中文模式下\footnote{英文模式下，由于未加载中文宏包，无法输入中文。}，使用 \lstinline|\date{\zhdate{2019/12/09}}|，如果需要当天的汉化日期，可以使用 \lstinline|\date{\zhtoday}|，这两个命令都来源于 \href{https://ctan.org/pkg/zhnumber}{\lstinline{zhnumber}} 宏包。
+    为了获得中文日期，必须在中文模式下，使用 \lstinline|\date{\zhdate{2019/12/09}}|，如果需要当天的汉化日期，可以使用 \lstinline|\date{\zhtoday}|，这两个命令都来源于 \href{https://ctan.org/pkg/zhnumber}{\lstinline{zhnumber}} 宏包。
   \item \textit{如何添加多个作者？}\\
     在 \lstinline{\author} 里面使用 \lstinline{\and}，作者单位可以用 \lstinline{\\} 换行。
     \begin{lstlisting}
       \author{author 1\\ org. 1 \and author 2 \\ org. 2 }
     \end{lstlisting}
 \end{enumerate}
-
-
-\section{示例}
-
-\begin{lstlisting}
-\documentclass[cn,hazy,blue,screen,14pt]{elegantnote}
-
-\title{ElegantNote Example}
-\author{ddswhu}
-\institute{Elegant\LaTeX{} Program}
-% \version{1.00}
-\date{}
-
-\begin{document}
-
-\maketitle
-
-\section{Introduction}
-
-The content of Introduction.
-
-\end{document}
-\end{lstlisting}
 
 \end{document}
