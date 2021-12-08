@@ -426,8 +426,10 @@
       \large
       \lineskip .5em%
       \begin{tabular}[t]{c}%
-        \@author\\
-        \the\institute
+        \@author
+      \end{tabular}\\
+      \begin{tabular}[t]{c}%
+          \the\institute
       \end{tabular}\par}%
 
   \IfEmpty\version
