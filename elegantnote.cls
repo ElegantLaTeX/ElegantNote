@@ -23,6 +23,7 @@
 \DeclareVoidOption{blue}{\ekv{color=blue}}
 \DeclareVoidOption{sakura}{\ekv{color=sakura}}
 \DeclareVoidOption{black}{\ekv{color=black}}
+\DeclareVoidOption{brown}{\ekv{color=brown}}
 
 \DeclareStringOption[pad]{device}
 \DeclareVoidOption{pc}{\ekv{device=pc}}
@@ -38,6 +39,7 @@
 \DeclareStringOption{mode}
 \DeclareVoidOption{geye}{\ekv{mode=geye}}
 \DeclareVoidOption{hazy}{\ekv{mode=hazy}}
+\DeclareVoidOption{sepia}{\ekv{mode=sepia}}
 
 \DeclareStringOption[ctexfont]{chinesefont}
 \DeclareVoidOption{ctexfont}{\ekv{chinesefont=ctexfont}}
@@ -183,6 +185,10 @@
   \definecolor{geyecolor}{RGB}{251,250,248}%
   \pagecolor{geyecolor}
 }{\relax}
+\ifdefstring{\ELEGANT@mode}{sepia}{
+  \definecolor{geyecolor}{RGB}{250,237,225}%
+  \pagecolor{geyecolor}
+}{\relax}
 
 
 % graphics path
@@ -245,11 +251,15 @@
 \ifdefstring{\ELEGANT@color}{black}{
   \definecolor{ecolor}{RGB}{0,0,0}%
 }{\relax}
+\ifdefstring{\ELEGANT@color}{brown}{
+  \definecolor{ecolor}{RGB}{109,62,18}%
+}{\relax}
 
 \definecolor{egreen}{RGB}{0,120,2}
 \definecolor{ecyan}{RGB}{0,175,152}
 \definecolor{eblue}{RGB}{20,50,104}
 \definecolor{sakura}{RGB}{255,183,197}
+\definecolor{brown}{RGB}{109,62,18}
 
 %% device settings
 %% default=pad
