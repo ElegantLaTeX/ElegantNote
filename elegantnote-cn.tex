@@ -5,7 +5,7 @@
 \author{邓东升}
 \institute{Elegant\LaTeX{} Program}
 
-\version{2.30}
+\version{2.40}
 \date{\zhtoday}
 
 \usepackage{array}
@@ -18,10 +18,9 @@
   \includegraphics[width=0.2\textwidth]{logo-blue.png}
 }
 
-
 \section{ElegantNote 使用说明}
 
-新版 ElegantNote 是基于标准的 \LaTeX{} 文类 article 重新设计的，格式更加简化的笔记模板！本模板支持两种编译方式，\hologo{pdfLaTeX} 和 \hologo{XeLaTeX}，英文模式下请使用 \hologo{pdfLaTeX} 进行编译，中文模式下推荐使用 \hologo{XeLaTeX}。
+新版 ElegantNote 是基于标准的 \LaTeX{} 文类 article 重新设计的，格式更加简化的笔记模板！本模板支持两种编译方式，\hologo{pdfLaTeX} 和 \hologo{XeLaTeX}，英文模式下请使用 \hologo{pdfLaTeX} 进行编译，中文模式下务必使用 \hologo{XeLaTeX}。
 
 新模板有下面几个特性：
 
@@ -38,8 +37,6 @@
   \item 英文模式通过 \lstinline{bibstyle} 选项（默认为 \lstinline{apalike}）支持参考文献格式修改；
   \item 支持参考格式显示格式修改 \lstinline{cite} 可选为 \lstinline{authoryear}、\lstinline{numbers} （默认）和 \lstinline{super}。
 \end{itemize}
-
-本次更新：修复 \TeX{} Live 2020 更新之后因 \lstinline{gbt7714} 宏包更新用法导致模板出错的问题。
 
 \subsection{模板模式}
 
@@ -104,7 +101,7 @@
 模板提供中文字体选项 \lstinline{chinesefont}，可选项有
 \begin{enumerate}
 \item \lstinline{ctexfont}：默认选项，使用 \lstinline{ctex} 宏包根据系统自行选择字体，可能存在字体缺失的问题，更多内容参考 \lstinline{ctex} 宏包\href{https://ctan.org/pkg/ctex}{官方文档}\footnote{可以使用命令提示符，输入 \lstinline{texdoc ctex} 调出本地 \lstinline{ctex} 宏包文档}。
-\item \lstinline{founder}：方正字体选项，调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，然后设置字体为方正四款免费字体，方正字体下载注意事项见后文。
+\item \lstinline{founder}：方正字体选项（需要用户安装字体），调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，然后设置字体为方正四款免费字体，方正字体下载注意事项见后文。
 \item \lstinline{nofont}：调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，不设定中文字体，用户可以自行设置中文字体，具体见后文。
 \end{enumerate}
 
@@ -119,19 +116,19 @@
 \end{figure}
 
 \subsubsection{其他中文字体}
-如果你想完全自定义字体\footnote{这里仍然以方正字体为例。}，你可以选择 \lstinline{chinesefont=nofont}，然后在导言区设置
+如果你想完全自定义字体\footnote{这里仍然以方正字体为例。}，你可以选择 \lstinline{chinesefont=nofont}，然后在导言区设置，参考代码如下：
 \begin{lstlisting}
-\setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong-Z01}
-\setCJKsansfont[BoldFont={FZHei-B01},ItalicFont={FZHei-B01}]{FZHei-B01}
-\setCJKmonofont[BoldFont={FZHei-B01},ItalicFont={FZHei-B01}]{FZFangSong-Z02}
-\setCJKfamilyfont{zhsong}{FZShuSong-Z01}
-\setCJKfamilyfont{zhhei}{FZHei-B01}
-\setCJKfamilyfont{zhkai}{FZKai-Z03}
-\setCJKfamilyfont{zhfs}{FZFangSong-Z02}
-\newcommand*{\songti}{\CJKfamily{zhsong}}
-\newcommand*{\heiti}{\CJKfamily{zhhei}}
-\newcommand*{\kaishu}{\CJKfamily{zhkai}}
-\newcommand*{\fangsong}{\CJKfamily{zhfs}}
+  \setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong-Z01}
+  \setCJKsansfont[BoldFont={FZHei-B01}]{FZKai-Z03}
+  \setCJKmonofont[BoldFont={FZHei-B01}]{FZFangSong-Z02}
+  \setCJKfamilyfont{zhsong}{FZShuSong-Z01}
+  \setCJKfamilyfont{zhhei}{FZHei-B01}
+  \setCJKfamilyfont{zhkai}[BoldFont={FZHei-B01}]{FZKai-Z03}
+  \setCJKfamilyfont{zhfs}[BoldFont={FZHei-B01}]{FZFangSong-Z02}
+  \newcommand*{\songti}{\CJKfamily{zhsong}}
+  \newcommand*{\heiti}{\CJKfamily{zhhei}}
+  \newcommand*{\kaishu}{\CJKfamily{zhkai}}
+  \newcommand*{\fangsong}{\CJKfamily{zhfs}}
 \end{lstlisting}
 
 
@@ -232,83 +229,11 @@ Let $z$ be some element of $xH \cap yH$.  Then $z = xa$ for some $a \in H$, and 
 回归分析（regression analysis) 是确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法。根据定理~\ref{thm:fubi}，其运用十分广泛，回归分析按照涉及的变量的多少，分为一元回归和多元回归分析；按照因变量的多少，可分为简单回归分析和多重回归分析；按照自变量和因变量之间的关系类型，可分为线性回归分析和非线性回归分析。
 
 
-\section{协作人员招募}
-
-招募 Elegant\LaTeX{} 的协作人员，没有工资。工作内容：翻译 Elegant\LaTeX{} 系列模板相关的文稿（中翻英），维护模板的 wiki（主要涉及 Markdown），如果有公众号文稿写作经历的话，也可以帮忙写微信稿。本公告长期有效。
-
-目前 ElegantLaTeX 共有 4 名协作人员，分别是
-\begin{itemize}
-  \item 官方文档翻译: \href{https://github.com/peggy2006xzyz}{YPY};
-  \item GitHub 维基维护: \href{https://github.com/izinngo}{Ingo Zinngo}、\href{https://github.com/xiaohao890809}{追寻原风景};
-  \item QQ 群管理员: \href{https://github.com/sikouhjw}{Sikouhjw}.
-\end{itemize}
-
-在此感谢他们无私的奉献！
-
-
 \section{致谢}
 
-截止到 2020 年 04 月 12 日，ElegantNote 2.30 版本发布，ElegantNote 模板在 GitHub 上的收藏数（star）达到了 263。在此特别感谢 China\TeX{} 以及 \href{http://www.latexstudio.net/}{\LaTeX{} 工作室}对于本系列模板的大力宣传与推广。如果你喜欢我们的模板，你可以在 GitHub 上收藏（Star）我们的模板。
+特别感谢 \href{https://github.com/sikouhjw}{sikouhjw} 和 \href{https://github.com/syvshc}{syvshc}  长期以来对于 Github 上 issue 的快速回应，以及各个社区论坛对于 ElegantLaTeX 相关问题的回复。特别感谢 ChinaTeX 以及 \href{http://www.latexstudio.net/}{LaTeX 工作室} 对于本系列模板的大力宣传与推广。
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{star.png}
-  \caption{一键三连求赞}
-\end{figure}
-
-
-\section{捐赠}
-
-如果您非常喜爱我们的模板，你还可以选择捐赠以表达您对我们模板和我的支持！
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.4\textwidth]{donate.jpg}
-\end{figure}
-
-\textbf{赞赏费用的使用解释权归 Elegant\LaTeX{} 所有，并且不接受监督，请自愿理性打赏}。10 元以上的赞赏，我们将列入捐赠榜，并且发放捐赠纪念证（全部），谢谢各位金主！
-
-\begin{table}[htbp]
-  \scriptsize
-  \centering
-  \caption{Elegant\LaTeX{} 系列模板捐赠榜}
-    \begin{tabular}{*{8}{>{\scriptsize}c}}
-    \toprule
-    \textbf{捐赠者} & \textbf{金额} & \textbf{时间} & \textbf{渠道} & \textbf{捐赠者} & \textbf{金额} & \textbf{时间} & \textbf{渠道} \\
-    \midrule
-    Lerh  & 10 RMB & 2019/05/15 & 微信    & 越过地平线 & 10 RMB & 2019/05/15 & 微信 \\
-    银桑    & 20 RMB & 2019/05/27 & 微信    & *空    & 10 RMB & 2019/05/30 & 微信 \\
-    latexstudio.net & 666 RMB & 2019/06/05 & 支付宝   & A*n   & 40 RMB & 2019/06/15 & 微信 \\
-    * 夏   & 22 RMB & 2019/06/15 & 微信    & * 倩   & 21 RMB  & 2019/06/15 & 微信 \\
-    Cassis & 11 RMB & 2019/06/30 & 微信    & *君    & 10 RMB & 2019/07/23 & 微信 \\
-    P*u   & 50 RMB & 2019/07/30 & 微信    & *萌    & 19 RMB & 2019/08/28 & 微信 \\
-    曲豆豆   & 10 RMB & 2019/08/28 & 微信    & 李博    & 100 RMB & 2019/10/06 & 微信 \\
-    Njustsll & 10 RMB & 2019/10/11 & 微信    & 刘志阔   & 99.99 RMB & 2019/10/15 & 支付宝 \\
-    * 韬   & 16 RMB & 2019/10/17 & 微信    & 赤霓    & 12 RMB & 2019/10/17 & 支付宝 \\
-    追寻原风景 & 10 RMB & 2019/10/28 & 微信    & 郭德良   & 88 RMB & 2019/11/03 & 微信 \\
-    自强不息  & 20 RMB & 2019/11/04 & 支付宝   & 读书之虫  & 20 RMB & 2019/11/18 & 微信 \\
-    *等    & 10 RMB & 2019/11/18 & 微信    & *哲    & 20 RMB & 2019/11/18 & 微信 \\
-    佚名    & 10 RMB & 2019/11/24 & 微信    & Jiye Qian & 66 RMB & 2019/12/04 & 微信 \\
-    * 阳   & 20 RMB & 2019/12/05 & 微信    & Catcher & 11 RMB & 2019/12/08 & 支付宝 \\
-    希尔波特门徒 & 10 RMB & 2019/12/09 & 支付宝   & * 伟   & 10 RMB & 2019/12/09 & 微信 \\
-    Simon & 20 RMB & 2019/12/11 & 支付宝   & 流殇丶浅忆 & 66.60 RMB & 2019/12/18 & 支付宝 \\
-    羽     & 10 RMB & 2019/12/20 & 支付宝   & * 琛   & 15 RMB & 2019/12/20 & 微信 \\
-    随风    & 20 RMB & 2019/12/27 & 支付宝   & Ws    & 23.30 RMB & 2019/12/28 & 微信 \\
-    初八    & 100 RMB  & 2020/01/02 & 支付宝   & p*e   & 20 RMB & 2020/01/03 & 微信 \\
-    Shunmx & 100 RMB & 2020/01/03 & 微信    & hj    & 10 RMB & 2020/01/03 & 微信 \\
-    F*5   & 10 RMB & 2020/01/03 & 微信    & S*m   & 20.20 RMB & 2020/01/03 & 微信 \\
-    二代青雉  & 13 RMB & 2020/01/14 & 支付宝   & *?    & 66 RMB & 2020/01/15 & 微信 \\
-    Mr. Xiong & 20 RMB & 2020/01/17 & 微信    & *博    & 15 RMB & 2020/01/18 & 微信 \\
-    * 者  & 10 RMB & 2020/02/02 & 微信    & Jackie  &  88.80 RMB  &  2020/02/09 & 微信 \\
-    Henry\_Sun、 & 50 RMB & 2020/02/14 & 支付宝 & * 桥  & 50 RMB & 2020/02/21 & 微信 \\
-    昀琏 & 10 RMB & 2020/03/02 & 支付宝 & S*y  &  10 RMB  &  2020/03/15 & 微信 \\
-    * 哥  & 66.66 RMB & 2020/03/17 & 微信    &   K*e & 30 RMB & 2020/03/30 & 微信\\
-    * 阳  &  20 RMB  &  2020/04/02 & 微信 & 士*n  & 30 RMB & 2020/04/11 & 微信 \\
-    \bottomrule
-    \end{tabular}%
-  \label{tab:donation}%
-\end{table}%
-
+如果你喜欢我们的模板，你可以在 Github 上收藏我们的模板。
 
 \section{常见问题 FAQ}
 
