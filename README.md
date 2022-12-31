@@ -14,6 +14,11 @@ ElegantNote is designed for Notes. Just enjoy it! If you have any questions, sug
 
 设计 ElegantNote 是为了方便记录笔记和阅读笔记。如果你有其他问题、建议或者报告 bug，可以提交 issues 或者给我们发邮件：elegantlatex2e@gmail.com。最近我们新建了一个 QQ 用户交流群（Q 群：692108391），欢迎加入。
 
+
+**Caution: This template will no longer be maintained since January 1st, 2023.**
+
+**注意：本模板自 2023 年 1 月 1 日开始，不再维护，不建议使用本系列模板！**
+
 # License
 
 This work is released under the LaTeX Project Public License, v1.3c or later. 
