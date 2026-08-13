@@ -220,7 +220,7 @@
 
 \RequirePackage{graphicx}
 \RequirePackage{booktabs}
-\let\openbox\relax
+% \let\openbox\relax
 
 \RequirePackage{xcolor}
 \definecolor{winered}{rgb}{0.5,0,0}
@@ -274,7 +274,7 @@
   {./picture/}
 }
 
-\let\openbox\relax
+% \let\openbox\relax
 \newtheoremstyle{plain}{\topsep}{\topsep}{\citshape}{}{%
   \color{ecolor}\bfseries}{}{%
   0.5em}{%
@@ -581,7 +581,7 @@
   frame=none,
   tabsize=2}
 
-\addbibresource[location=local]{reference.bib}
+% \addbibresource[location=local]{reference.bib}
 
 % restore the tt default family to lmodern tt family
 \renewcommand\ttdefault{lmtt}
