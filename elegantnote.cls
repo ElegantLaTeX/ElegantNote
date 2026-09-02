@@ -3,7 +3,7 @@
 % Lastest Version: https://github.com/ElegantLaTeX/ElegantNote
 
 % --- Class structure: identification part
-\ProvidesClass{elegantnote}[2026/2/27 ElegantNote v2.60 class]
+\ProvidesClass{elegantnote}[2026/09/01 ElegantNote v2.70 class]
 \NeedsTeXFormat{LaTeX2e}
 
 

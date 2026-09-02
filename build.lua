@@ -8,7 +8,7 @@
              Do Check Before Upload
 --]==========================================]--
 module           = "elegantnote"
-version          = "2.60"
+version          = "2.70"
 maintainer       = "Ran Wang"
 uploader         = maintainer
 maintainid       = "ElegantLaTeX"
